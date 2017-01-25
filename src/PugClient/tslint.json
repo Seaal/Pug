@@ -1,0 +1,40 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "curly": true,
+    "indent": [ "spaces" ],
+    "quotemark": [ "double" ],
+    "trailing-comma": "never",
+    "semicolon": [ "always" ],
+    "class-name": true,
+    "object-literal-sort-keys": false,
+    "comment-format": [],
+    "interface-name": [],
+    "max-line-length": [ true, 200 ],
+    "no-string-literal": false,
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "onespace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ],
+    "no-console": [],
+    "whitespace": [
+      false,
+      "check-branch"
+    ]
+  },
+  "rulesDirectory": [
+  ]
+}
