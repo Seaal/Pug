@@ -30,7 +30,14 @@ namespace PugClient
             }
 
             app.UseStaticFiles()
-               .UseMvc();
+               .UseMvc(routes =>
+               {
+                   routes.MapRoute(
+                    name: "default",
+                    template: "{*.}",
+                    defaults: new { controller = "Home", action = "Index" }
+                    );
+               });
         }
     }
 }

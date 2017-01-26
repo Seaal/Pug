@@ -28,21 +28,12 @@
                 packages + "rxjs/**/*{.js,.js.map}",
                 "!" + packages + "rxjs/bundles/*"
             ],
-            mydatepicker: [
-                packages + "mydatepicker/dist/**/**"
-            ],
-            mydaterangepicker: [
-                packages + "mydaterangepicker/dist/**/**"
-            ],
             src: [
                 packages + "core-js/client/shim.min.js",
                 packages + "zone.js/dist/zone.js",
-                packages + "reflect-metadata/Reflect.js",
                 packages + "systemjs/dist/system.src.js",
                 packages + "jquery/dist/jquery.js",
                 packages + "bootstrap/dist/js/bootstrap.js",
-                packages + "d3/d3.js",
-                packages + "screenfull/dist/screenfull.js",
 
                 packages + "bootstrap/dist/css/bootstrap.css",
                 packages + "font-awesome/css/font-awesome.css"
@@ -75,7 +66,7 @@
             "./project.json"
         ],
 
-        port: 63488
+        port: 5000
     };
 
     return config;
