@@ -33,7 +33,8 @@
     "whitespace": [
       false,
       "check-branch"
-    ]
+    ],
+    "ordered-imports": false
   },
   "rulesDirectory": [
   ]

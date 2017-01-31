@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <base href="/"/>
     <title>PugClient</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,10 +20,10 @@
     <!-- endinject -->
     <script src="/systemjs.config.js"></script>
     <script>
-      System.import('app').catch(function(err){ console.error(err); });
+        System.import('app').catch(function(err) { console.error(err); });
     </script>
 </head>
 <body>
-    <my-app>Loading AppComponent content here ...</my-app>
+    <pug-client-app>Loading...</pug-client-app>
 </body>
 </html>
