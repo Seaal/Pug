@@ -1,12 +1,12 @@
 ﻿<h2>CTFPug Lobby</h2>
 
-<button class="btn btn-primary">Create Server</button>
+<button class="btn btn-primary" (click)="createServer()">Create Server</button>
 
 <p>Servers</p>
 
 <p *ngIf="servers.length == 0">No servers available.</p>
-<ul *ngIf="servers.length > 1">
+<ul *ngIf="servers.length > 0">
     <li *ngFor="let server of servers">
-        {{server.ip}} - players: {{server.players}} <button class="btn btn-danger">Delete Server</button>
+        {{server.ip}} - players: {{server.players}} <button class="btn btn-danger btn-xs" (click)="deleteServer(server.id)">Delete Server</button>
     </li>
 </ul>
