@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using PugClient.Hubs;
 
 namespace PugClient
 {
@@ -16,6 +18,23 @@ namespace PugClient
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+            {
+                ContractResolver = new SignalRContractResolver()
+            };
+
+            JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
+
+            services.Add(new ServiceDescriptor(
+                typeof(JsonSerializer),
+                provider => serializer,
+                ServiceLifetime.Transient
+            ));
+
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableJavaScriptProxies = false;
+            });
             services.AddMvc();
         }
 
@@ -30,6 +49,7 @@ namespace PugClient
             }
 
             app.UseStaticFiles()
+               .UseSignalR()
                .UseMvc(routes =>
                {
                    routes.MapRoute(

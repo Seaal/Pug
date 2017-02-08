@@ -1,5 +1,7 @@
 ﻿import { Component, OnInit } from "@angular/core";
+
 import { Server } from "./server";
+import { PugService } from "./pug.service";
 
 @Component({
     templateUrl: "/app/pug/lobby.component.html",
@@ -8,16 +10,21 @@ import { Server } from "./server";
 export class LobbyComponent implements OnInit {
     public servers: Server[];
 
+    constructor(private pugService: PugService) { }
+
     public ngOnInit(): void {
         this.servers = [];
+
+        this.pugService.initListener().subscribe(
+            (server) => this.servers.push(server)
+        );
+        this.pugService.start();
     }
 
     public createServer(): void {
-        this.servers.push({
-            id: "1",
-            ip: "192.168.0.01:29070",
-            players: 0
-        });
+        this.pugService.createServer().subscribe(
+            (server) => this.servers.push(server)
+        );
     }
 
     public deleteServer(serverId: string): void {

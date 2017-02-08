@@ -50,16 +50,7 @@ gulp.task("lint-typescript", function () {
 
 });
 
-gulp.task("typings", function () {
-
-    log("Restoring typings");
-
-    return gulp.src(config.typingsConfig)
-        .pipe($.typings());
-
-});
-
-gulp.task("typescript", ["clean-typescript", "lint-typescript", "typings"], function () {
+gulp.task("typescript", ["clean-typescript", "lint-typescript"], function () {
 
     log("Compiling typescript and adding them to the output");
 

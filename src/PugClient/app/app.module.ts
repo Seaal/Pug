@@ -7,7 +7,7 @@ import { PugModule } from "./pug/pug.module";
 import { CommonModule } from "./common/common.module";
 
 @NgModule({
-    imports: [ BrowserModule, AppRoutingModule, PugModule, CommonModule ],
+    imports: [BrowserModule, CommonModule, AppRoutingModule, PugModule],
     declarations: [ AppComponent ],
     bootstrap:    [ AppComponent ]
 })

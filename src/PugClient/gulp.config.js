@@ -34,6 +34,7 @@
                 packages + "systemjs/dist/system.src.js",
                 packages + "jquery/dist/jquery.js",
                 packages + "bootstrap/dist/js/bootstrap.js",
+                packages + "signalr/jquery.signalR.js",
 
                 packages + "bootstrap/dist/css/bootstrap.css",
                 packages + "font-awesome/css/font-awesome.css"
