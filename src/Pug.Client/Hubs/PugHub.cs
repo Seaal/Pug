@@ -5,14 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Hubs;
+using Pug.Server.ServerManager;
 
 namespace PugClient.Hubs
 {
     [HubName("pugHub")]
     public class PugHub : Hub<IPugPushMethods>
     {
-        private static readonly List<ServerInfo> Servers = new List<ServerInfo>();
-        private static int _serverIdCount = 0;
+        private readonly IGameServerManager _serverManager;
+
+        public PugHub(IGameServerManager serverManager)
+        {
+            _serverManager = serverManager;
+        }
 
         public override Task OnConnected()
         {
@@ -21,37 +26,20 @@ namespace PugClient.Hubs
             return base.OnConnected();
         }
 
-        public ServerInfo CreateServer()
+        public async Task<ServerInfo> CreateServer()
         {
-            Process dockerProcess = new Process
-            {
-                StartInfo =
-                {
-                    Arguments = "",
-                    FileName = "docker",
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true
-                }
-            };
+            GameServer gameServer = await _serverManager.StartServer();
 
 
-            dockerProcess.ErrorDataReceived += (s, e) => Clients.All.ServerLog(e.Data);
-            dockerProcess.OutputDataReceived += (s, e) => Clients.All.ServerLog(e.Data);
-
-            dockerProcess.Start();
-            dockerProcess.BeginOutputReadLine();
-            dockerProcess.BeginErrorReadLine();
-
-            _serverIdCount++;
             ServerInfo server = new ServerInfo()
             {
-                Id = _serverIdCount,
-                Ip = "192.168.0.1:2907" + _serverIdCount,
-                Players = 0
+                Id = gameServer.Id,
+                Ip = gameServer.Ip,
+                Players = gameServer.Players
             };
 
-            Servers.Add(server);
+            gameServer.MessagesObservable.Subscribe(data => Clients.All.ServerLog(data));
+            gameServer.ErrorsObservable.Subscribe(data => Clients.All.ServerLog(data));
 
             Clients.OthersInGroup("lobby").ServerUpdate(server);
 

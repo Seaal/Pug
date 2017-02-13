@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Pug.Server.ServerManager;
 using PugClient.Hubs;
 
 namespace PugClient
@@ -30,6 +31,8 @@ namespace PugClient
                 provider => serializer,
                 ServiceLifetime.Transient
             ));
+
+            services.AddSingleton<IGameServerManager, GameServerManager>();
 
             services.AddSignalR(options =>
             {
