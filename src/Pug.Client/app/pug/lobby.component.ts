@@ -9,15 +9,22 @@ import { PugService } from "./pug.service";
 })
 export class LobbyComponent implements OnInit {
     public servers: Server[];
+    public serverLogs: string[];
 
     constructor(private pugService: PugService) { }
 
-    public ngOnInit(): void {
+	public ngOnInit(): void {
         this.servers = [];
+        this.serverLogs = [];
 
         this.pugService.initListener().subscribe(
             (server) => this.servers.push(server)
         );
+
+        this.pugService.logListener().subscribe(
+            (log) => this.serverLogs.push(log)
+        );
+
         this.pugService.start();
     }
 

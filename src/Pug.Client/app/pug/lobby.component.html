@@ -10,3 +10,9 @@
         {{server.ip}} - players: {{server.players}} <button class="btn btn-danger btn-xs" (click)="deleteServer(server.id)">Delete Server</button>
     </li>
 </ul>
+
+<ul>
+    <li *ngFor="let log of serverLogs">
+        {{log}}
+    </li>
+</ul>

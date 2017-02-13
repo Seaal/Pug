@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
@@ -22,6 +23,26 @@ namespace PugClient.Hubs
 
         public ServerInfo CreateServer()
         {
+            Process dockerProcess = new Process
+            {
+                StartInfo =
+                {
+                    Arguments = "",
+                    FileName = "docker",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                }
+            };
+
+
+            dockerProcess.ErrorDataReceived += (s, e) => Clients.All.ServerLog(e.Data);
+            dockerProcess.OutputDataReceived += (s, e) => Clients.All.ServerLog(e.Data);
+
+            dockerProcess.Start();
+            dockerProcess.BeginOutputReadLine();
+            dockerProcess.BeginErrorReadLine();
+
             _serverIdCount++;
             ServerInfo server = new ServerInfo()
             {

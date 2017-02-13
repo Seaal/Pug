@@ -12,6 +12,10 @@ export class PugService {
         return this.signalrService.on<Server>("pugHub", "serverUpdate");
     }
 
+    public logListener(): Observable<string> {
+	    return this.signalrService.on<string>("pugHub", "serverLog");
+    }
+
     public start(): Observable<boolean> {
         return this.signalrService.start();
     }

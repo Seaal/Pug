@@ -8,5 +8,6 @@ namespace PugClient.Hubs
     public interface IPugPushMethods
     {
         void ServerUpdate(ServerInfo serverInfo);
+        void ServerLog(string data);
     }
 }
