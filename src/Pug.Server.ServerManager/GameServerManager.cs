@@ -10,21 +10,24 @@ namespace Pug.Server.ServerManager
 {
     public class GameServerManager : IGameServerManager
     {
-        private readonly ConcurrentDictionary<Guid, Process> _gameProcesses;
+        private readonly ConcurrentDictionary<Guid, GameServer> _gameServers;
+        private readonly int basePort = 29070;
 
         public GameServerManager()
         {
-            _gameProcesses = new ConcurrentDictionary<Guid, Process>();
+            _gameServers = new ConcurrentDictionary<Guid, GameServer>();
         }
 
         public async Task<GameServer> StartServer()
         {
+            int port = GetServerPort();
+
             Process dockerProcess = new Process
             {
                 StartInfo =
                 {
-                    Arguments = "",
                     FileName = "docker",
+                    Arguments = $"run -v \"C:/jedi-academy-server\":\"/jedi-academy\" -e NET_PORT={port} -p {port}:{port}/udp docker-jedi-server",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
@@ -33,6 +36,8 @@ namespace Pug.Server.ServerManager
 
             ISubject<string> outputSubject = new Subject<string>();
             ISubject<string> errorSubject = new Subject<string>();
+
+            outputSubject.OnNext("Starting Server!");
 
             dockerProcess.ErrorDataReceived += (s, e) => errorSubject.OnNext(e.Data);
             dockerProcess.OutputDataReceived += (s, e) => outputSubject.OnNext(e.Data);
@@ -44,27 +49,41 @@ namespace Pug.Server.ServerManager
             GameServer gameServer = new GameServer()
             {
                 Id = Guid.NewGuid(),
-                Ip = "192.168.0.1:" + (29070 + _gameProcesses.Count),
+                Port = port,
+                Ip = "192.168.0.1",
                 Password = "test",
                 Players = 0,
                 ErrorsObservable = errorSubject,
-                MessagesObservable = outputSubject
+                MessagesObservable = outputSubject,
+                Process = dockerProcess
             };
 
-            _gameProcesses.TryAdd(gameServer.Id, dockerProcess);
+            _gameServers.TryAdd(gameServer.Id, gameServer);
 
             return gameServer;
         }
 
         public async Task StopServer(Guid id)
         {
-            Process gameProcess;
+            GameServer gameServer;
 
-            if (_gameProcesses.TryRemove(id, out gameProcess))
+            if (_gameServers.TryRemove(id, out gameServer))
             {
-                gameProcess.Kill();
-                gameProcess.Dispose();
+                gameServer.Process.Kill();
+                gameServer.Process.Dispose();
             }
+        }
+
+        private int GetServerPort()
+        {
+            int currentPort = basePort;
+
+            while (_gameServers.Values.Any(gs => gs.Port == currentPort))
+            {
+                currentPort++;
+            }
+
+            return currentPort;
         }
     }
 }
