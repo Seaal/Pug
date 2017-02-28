@@ -35,6 +35,8 @@ export class LobbyComponent implements OnInit {
     }
 
     public deleteServer(serverId: string): void {
-        console.log("delete: " + serverId);
+        this.pugService.deleteServer(serverId).subscribe(
+            (success) => this.servers = this.servers.filter((server) => server.id !== serverId)
+        );
     }
 }

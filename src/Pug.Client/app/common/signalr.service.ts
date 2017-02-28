@@ -35,12 +35,14 @@ export class SignalRService {
         return subject;
     }
 
-    public send<TSend, TReturn>(hubName: string, methodName: string, data: TSend): Observable<TReturn> {
+    public send<TReturn>(hubName: string, methodName: string, ...data: any[]): Observable<TReturn> {
         let proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
 
         let subject: Subject<TReturn> = new Subject<TReturn>();
 
-        proxy.invoke(methodName).then(
+        data.unshift(methodName);
+
+        proxy.invoke.apply(proxy, data).then(
             (value: TReturn) => subject.next(value)
         );
 

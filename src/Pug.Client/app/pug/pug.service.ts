@@ -21,6 +21,10 @@ export class PugService {
     }
 
     public createServer(): Observable<Server> {
-        return this.signalrService.send<Server, null>("pugHub", "createServer", null);
+        return this.signalrService.send<Server>("pugHub", "createServer");
+    }
+
+    public deleteServer(serverId: string): Observable<boolean> {
+        return this.signalrService.send<boolean>("pugHub", "deleteServer", serverId);
     }
 }

@@ -22,12 +22,14 @@ namespace Pug.Server.ServerManager
         {
             int port = GetServerPort();
 
+            Guid id = Guid.NewGuid();
+
             Process dockerProcess = new Process
             {
                 StartInfo =
                 {
                     FileName = "docker",
-                    Arguments = $"run -v \"C:/jedi-academy-server\":\"/jedi-academy\" -e NET_PORT={port} -p {port}:{port}/udp docker-jedi-server",
+                    Arguments = $"run -v \"C:/jedi-academy-server\":\"/jedi-academy\" --name \"{id}\" -e NET_PORT={port} -p {port}:{port}/udp docker-jedi-server",
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
@@ -48,7 +50,7 @@ namespace Pug.Server.ServerManager
 
             GameServer gameServer = new GameServer()
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 Port = port,
                 Ip = "192.168.0.1",
                 Password = "test",
@@ -69,7 +71,19 @@ namespace Pug.Server.ServerManager
 
             if (_gameServers.TryRemove(id, out gameServer))
             {
-                gameServer.Process.Kill();
+                Process dockerKillProcess = new Process()
+                {
+                    StartInfo =
+                    {
+                        FileName = "docker",
+                        Arguments = $"kill {id}",
+                        UseShellExecute = false
+                    }
+                };
+
+                dockerKillProcess.Start();
+                dockerKillProcess.WaitForExit(5000);
+
                 gameServer.Process.Dispose();
             }
         }

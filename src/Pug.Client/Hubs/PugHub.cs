@@ -30,7 +30,6 @@ namespace PugClient.Hubs
         {
             GameServer gameServer = await _serverManager.StartServer();
 
-
             ServerInfo server = new ServerInfo()
             {
                 Id = gameServer.Id,
@@ -44,6 +43,13 @@ namespace PugClient.Hubs
             Clients.OthersInGroup("lobby").ServerUpdate(server);
 
             return server;
+        }
+
+        public async Task DeleteServer(string serverId)
+        {
+            Guid id = new Guid(serverId);
+
+            await _serverManager.StopServer(id);
         }
     }
 }
