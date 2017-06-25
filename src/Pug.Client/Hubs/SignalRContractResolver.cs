@@ -21,7 +21,6 @@ namespace PugClient.Hubs
             _assembly = typeof(Connection).GetTypeInfo().Assembly;
         }
 
-
         public JsonContract ResolveContract(Type type)
         {
             if (type.GetTypeInfo().Assembly.Equals(_assembly))

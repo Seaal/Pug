@@ -12,9 +12,9 @@ namespace PugClient.Hubs
     {
         private readonly IGameServerManager _serverManager;
 
-        public PugHub()
+        public PugHub(IGameServerManager serverManager)
         {
-            _serverManager = new GameServerManager();
+            _serverManager = serverManager;
         }
 
         public override Task OnConnected()

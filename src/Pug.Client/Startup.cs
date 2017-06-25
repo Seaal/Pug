@@ -11,8 +11,10 @@ using Pug.Server.ServerManager;
 using PugClient.Hubs;
 using Microsoft.Owin.Builder;
 using Owin;
+using Microsoft.AspNet.SignalR;
+using Pug.Client.Hubs;
 
-namespace PugClient
+namespace Pug.Client
 {
     public class Startup
     {
@@ -34,8 +36,12 @@ namespace PugClient
             ));
 
             services.AddSingleton<IGameServerManager, GameServerManager>();
+            services.AddTransient<PugHub>();
 
             services.AddMvc();
+
+            //Add Dependency Injection to SignalR
+            GlobalHost.DependencyResolver = new InjectionDependencyResolver(services.BuildServiceProvider());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
