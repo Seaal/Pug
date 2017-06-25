@@ -67,9 +67,8 @@ namespace Pug.Server.ServerManager
 
         public async Task StopServer(Guid id)
         {
-            GameServer gameServer;
 
-            if (_gameServers.TryRemove(id, out gameServer))
+            if (_gameServers.TryRemove(id, out GameServer gameServer))
             {
                 Process dockerKillProcess = new Process()
                 {
