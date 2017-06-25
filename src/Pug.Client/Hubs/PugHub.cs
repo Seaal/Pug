@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.SignalR.Hubs;
 using Pug.Server.ServerManager;
+using Microsoft.AspNet.SignalR;
 
 namespace PugClient.Hubs
 {
-    [HubName("pugHub")]
-    public class PugHub : Hub<IPugPushMethods>
+    public class PugHub : Hub
     {
         private readonly IGameServerManager _serverManager;
 
-        public PugHub(IGameServerManager serverManager)
+        public PugHub()
         {
-            _serverManager = serverManager;
+            _serverManager = new GameServerManager();
         }
 
         public override Task OnConnected()

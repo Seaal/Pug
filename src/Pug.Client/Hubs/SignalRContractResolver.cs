@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
+using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace PugClient.Hubs
 {

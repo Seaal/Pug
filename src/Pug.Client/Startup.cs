@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Pug.Server.ServerManager;
 using PugClient.Hubs;
+using Microsoft.Owin.Builder;
+using Owin;
 
 namespace PugClient
 {
@@ -34,10 +35,6 @@ namespace PugClient
 
             services.AddSingleton<IGameServerManager, GameServerManager>();
 
-            services.AddSignalR(options =>
-            {
-                options.Hubs.EnableJavaScriptProxies = false;
-            });
             services.AddMvc();
         }
 
@@ -51,9 +48,24 @@ namespace PugClient
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles()
-               .UseSignalR()
-               .UseMvc(routes =>
+            app.UseStaticFiles();
+
+            app.UseOwin(addToPipeline =>
+            {
+                addToPipeline(next =>
+                {
+                    var appBuilder = new AppBuilder();
+                    appBuilder.Properties["builder.DefaultApp"] = next;
+
+                    IAppBuilder iAppBuilder = appBuilder;
+
+                    iAppBuilder.MapSignalR();
+
+                    return appBuilder.Build<Func<IDictionary<string, object>, Task>>();
+                });
+            });
+
+            app.UseMvc(routes =>
                {
                    routes.MapRoute(
                     name: "default",
