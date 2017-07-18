@@ -126,34 +126,23 @@ gulp.task("sync-component-styles", ["component-styles"], function () {
     browserSync.reload();
 });
 
-gulp.task("clean-rxjs", function () {
-
-    log("Cleaning rxjs files from output");
-
-    return del(config.libs.output + "rxjs");
-
-});
-
-gulp.task("rxjs", ["clean-rxjs"], function () {
-
-    return gulp.src(config.libs.rxjs, { base: "./node_modules/" })
-        .pipe(gulp.dest(config.libs.output));
-
-});
-
-gulp.task("clean-angular", function () {
+gulp.task("clean-dynamic-libs", function () {
 
     log("Cleaning angular files from output");
 
-    return del(config.libs.output + "@angular/**/*");
+    return del([
+        config.libs.output + "@angular",
+        config.libs.output + "rxjs",
+        config.libs.output + "@ngx-translate"
+    ]);
 
 });
 
-gulp.task("angular", ["clean-angular"], function () {
+gulp.task("dynamic-libs", ["clean-dynamic-libs"], function () {
 
-    log("Copying angular files to output");
+    log("Copying dynamic library files to output");
 
-    return gulp.src(config.libs.angular, { base: "./node_modules/" })
+    return gulp.src(config.libs.dynamicSrc, { base: "./node_modules/" })
         .pipe(gulp.dest(config.libs.output));
 
 });
@@ -167,13 +156,12 @@ gulp.task("clean-libs", function () {
         "!" + config.libs.output + "@angular/**/*",
         "!" + config.libs.output + "@angular",
         "!" + config.libs.output + "rxjs",
-        "!" + config.libs.output + "mydatepicker",
-        "!" + config.libs.output + "mydaterangepicker"
+        "!" + config.libs.output + "@ngx-translate"
     ]);
 
 });
 
-gulp.task("libs", ["angular", "clean-libs", "rxjs"], function () {
+gulp.task("libs", ["dynamic-libs", "clean-libs"], function () {
 
     log("Copying libs to output");
 

@@ -1,9 +1,15 @@
 import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "pug-client-app",
   templateUrl: "/app/app.component.html"
 })
 export class AppComponent {
-    public name: string = "Angular";
+
+    constructor(translateService: TranslateService) {
+        translateService.defaultLang = "en";
+        translateService.use("en");
+    }
+
 }

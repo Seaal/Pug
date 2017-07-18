@@ -24,7 +24,9 @@
             '@angular/forms': "npm:@angular/forms/bundles/forms.umd.js",
 
             // other libraries
-            'rxjs': "npm:rxjs"
+            'rxjs': "npm:rxjs",
+            "@ngx-translate/core": "npm:@ngx-translate/core/bundles/core.umd.js",
+            "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/http-loader.umd.js"
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -33,6 +35,12 @@
                 defaultExtension: "js"
             },
             rxjs: {
+                defaultExtension: "js"
+            },
+            "@ngx-translate/core": {
+                defaultExtension: "js"
+            },
+            "@ngx-translate/http-loader": {
                 defaultExtension: "js"
             }
         }

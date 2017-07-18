@@ -23,11 +23,14 @@
 
         libs: {
             output: output + "libs/",
-            angular: packages + "@angular/**/bundles/*.umd.js",
-            rxjs: [
+            //Dynamically loaded by SystemJS
+            dynamicSrc: [
+                packages + "@angular/**/bundles/*.umd.js",
                 packages + "rxjs/**/*{.js,.js.map}",
-                "!" + packages + "rxjs/bundles/*"
+                "!" + packages + "rxjs/bundles/*",
+                packages + "@ngx-translate/**/bundles/*"
             ],
+            //Statically loaded in Index.cshtml
             src: [
                 packages + "core-js/client/shim.min.js",
                 packages + "zone.js/dist/zone.js",
