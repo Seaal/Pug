@@ -1,0 +1,31 @@
+﻿.titleArea {
+    background-color: red;
+}
+
+.teamArea {
+    background-color: blue;
+
+    padding: 10px;
+    color: white;
+    float: left;
+    width: 100%;
+
+    .team {
+        float: left;
+        width: 30%;
+    }
+
+    .action {
+        float: left;
+        width: 40%;
+
+        h2 {
+            text-align: center;
+        }
+    }
+}
+
+.playerArea {
+    background-color: green;
+    height: 200px;
+}

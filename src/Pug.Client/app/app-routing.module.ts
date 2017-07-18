@@ -2,7 +2,7 @@
 import { RouterModule, Routes } from "@angular/router";
 
 const appRoutes: Routes = [
-    { path: "", redirectTo: "/lobby", pathMatch: "full" }
+    { path: "", redirectTo: "/pug", pathMatch: "full" }
 ];
 
 @NgModule({

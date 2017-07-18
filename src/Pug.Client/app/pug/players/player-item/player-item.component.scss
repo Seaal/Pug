@@ -1,0 +1,18 @@
+﻿.player-item {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border: 1px solid black;
+    line-height: 48px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #333;
+    font-size: 24px;
+    margin: 1px;
+    cursor: pointer;
+}
+
+.player-item:hover {
+    border: 2px solid limegreen;
+    line-height: 46px;
+}
