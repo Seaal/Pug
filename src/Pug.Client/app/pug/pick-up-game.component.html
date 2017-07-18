@@ -4,29 +4,25 @@
 </div>
 <div class="teamArea">
     <div class="team team-left">
-        <h2>Blue Team</h2>
-        <p>Captain: Seaal</p>
+        <h2>{{ "pug.labels.team" | translate:pug.teams[0] }}</h2>
+        <p>Captain: {{ pug.teams[0].captain.name }}</p>
 
         <p>{{ "pug.labels.team_members" | translate }}</p>
         <ul>
-            <li>Seeker</li>
-            <li>Jaw4</li>
-            <li>Kimble</li>
+            <li *ngFor="let player of pug.teams[0].players">{{player.name}}</li>
         </ul>
     </div>
     <div class="action">
-        <h2>Red Team To Pick (21)</h2>
-        <pug-player-picker [players]="players" (playerPicked)="onPlayerPicked($event)"></pug-player-picker>
+        <h2>{{phaseString}}</h2>
+        <pug-player-picker [players]="pug.pickablePlayers" (playerPicked)="onPlayerPicked($event)"></pug-player-picker>
     </div>
     <div class="team team-right">
-        <h2>Red Team</h2>
-        <p>Captain: Alpha</p>
+        <h2>{{ "pug.labels.team" | translate:pug.teams[1] }}</h2>
+        <p>Captain: {{ pug.teams[1].captain.name }}</p>
 
         <p>{{ "pug.labels.team_members" | translate }}</p>
         <ul>
-            <li>Seeker</li>
-            <li>Jaw4</li>
-            <li></li>
+            <li *ngFor="let player of pug.teams[1].players">{{player.name}}</li>
         </ul>
     </div>
 </div>
