@@ -8,6 +8,8 @@ export class PickUpGameService {
 
     public getPug(): Observable<PickUpGame> {
         return Observable.of({
+            id: 12345,
+            path: ["Jedi Academy", "CTF Pug", "europug"],
             pickablePlayers: [
                 { id: "1", name: "Dave" },
                 { id: "2", name: "Mercer" },
