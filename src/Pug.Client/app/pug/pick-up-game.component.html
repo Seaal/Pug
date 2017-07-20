@@ -3,28 +3,12 @@
     <p>(Jedi Knight Academy > CTF PUG > europug)</p>
 </div>
 <div class="teamArea">
-    <div class="team team-left">
-        <h2>{{ "pug.labels.team" | translate:pug.teams[0] }}</h2>
-        <p>Captain: {{ pug.teams[0].captain.name }}</p>
-
-        <p>{{ "pug.labels.team_members" | translate }}</p>
-        <ul>
-            <li *ngFor="let player of pug.teams[0].players">{{player.name}}</li>
-        </ul>
-    </div>
+    <pug-team [team]="pug.teams[0]"></pug-team>
     <div class="action">
         <pug-phase-title [pug]="pug"></pug-phase-title>
         <pug-player-picker [players]="pug.pickablePlayers" (playerPicked)="onPlayerPicked($event)"></pug-player-picker>
     </div>
-    <div class="team team-right">
-        <h2>{{ "pug.labels.team" | translate:pug.teams[1] }}</h2>
-        <p>Captain: {{ pug.teams[1].captain.name }}</p>
-
-        <p>{{ "pug.labels.team_members" | translate }}</p>
-        <ul>
-            <li *ngFor="let player of pug.teams[1].players">{{player.name}}</li>
-        </ul>
-    </div>
+    <pug-team [team]="pug.teams[1]"></pug-team>
 </div>
 <div class="clearfix"></div>
 <div class="playerArea"></div>
