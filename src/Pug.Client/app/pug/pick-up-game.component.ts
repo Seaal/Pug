@@ -5,6 +5,7 @@ import { PickUpGame } from "./pick-up-game";
 import { Player } from "./players/player";
 import { PhaseService } from "./phases/phase.service";
 import { IPhaseStrategy } from "./phases/iphase-strategy";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     templateUrl: "app/pug/pick-up-game.component.html",
@@ -14,15 +15,10 @@ export class PickUpGameComponent implements OnInit {
 
     public pug: PickUpGame;
 
-    constructor(private pickUpGameService: PickUpGameService,
-                private phaseService: PhaseService) { }
+    constructor(private route: ActivatedRoute) { }
 
     public ngOnInit(): void {
-        this.pickUpGameService.getPug().subscribe((pug) => {
-            this.pug = pug;
-
-            this.phaseService.setCurrentPhase(pug.currentPhase);
-        });
+        this.pug = this.route.snapshot.data["pug"];
     }
 
     public onPlayerPicked(player: Player) {

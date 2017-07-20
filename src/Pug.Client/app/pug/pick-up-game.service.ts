@@ -2,12 +2,15 @@
 import { Observable } from "rxjs/Observable";
 import { Player } from "./players/player";
 import { PickUpGame } from "./pick-up-game";
+import { PhaseService } from "./phases/phase.service";
 
 @Injectable()
 export class PickUpGameService {
 
+    constructor(private phaseService: PhaseService) { }
+
     public getPug(): Observable<PickUpGame> {
-        return Observable.of({
+        const pug = {
             id: 12345,
             path: ["Jedi Academy", "CTF Pug", "europug"],
             pickablePlayers: [
@@ -41,7 +44,11 @@ export class PickUpGameService {
                     name: "Red"
                 }
             ]
-        });
+        };
+
+        this.phaseService.setCurrentPhase(pug.currentPhase);
+
+        return Observable.of(pug);
     }
 
 }
