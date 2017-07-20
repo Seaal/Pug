@@ -16,7 +16,7 @@ export class PickUpGameService {
             ],
             currentPhase: {
                 type: 1,
-                expiry: "2017-07-14T23:30",
+                expiry: moment().add(31, "seconds").toISOString(),
                 teamIndex: 0
             },
             teams: [

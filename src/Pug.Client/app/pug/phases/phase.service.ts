@@ -1,24 +1,51 @@
 ﻿import { Injectable } from "@angular/core";
 
-import { Subject } from "rxjs/Subject";
+import { ReplaySubject } from "rxjs/ReplaySubject";
 import { Observable } from "rxjs/Observable";
 
 import { PugPhase } from "./pug-phase";
-import { PugPhaseFactory } from "./pug-phase.factory";
+import { PugPhaseStrategyFactory } from "./pug-phase-strategy.factory";
 import { IPhaseStrategy } from "./iphase-strategy";
 
 @Injectable()
 export class PhaseService {
 
-    private currentPhaseSubject: Subject<IPhaseStrategy> = new Subject<IPhaseStrategy>();
+    private currentPhaseSubject: ReplaySubject<IPhaseStrategy> = new ReplaySubject<IPhaseStrategy>(1);
+    private phaseExpirySubject: ReplaySubject<number> = new ReplaySubject<number>(1);
 
-    constructor(private phaseStrategyFactory: PugPhaseFactory) { }
+    constructor(private phaseStrategyFactory: PugPhaseStrategyFactory) { }
 
     public setCurrentPhase(phase: PugPhase): void {
-        this.currentPhaseSubject.next(this.phaseStrategyFactory.make(phase));
+        const phaseStrategy: IPhaseStrategy = this.phaseStrategyFactory.make(phase);
+
+        const expiryTime: moment.Moment = phaseStrategy.getExpiryDateTime();
+
+        const currentTime = moment().utc();
+
+        let phaseDuration: number = expiryTime.diff(currentTime, "seconds");
+
+        if (phaseDuration > 0) {
+            let intervalId = setInterval(() => {
+                phaseDuration -= 1;
+
+                this.phaseExpirySubject.next(phaseDuration);
+
+                if (phaseDuration === 0) {
+                    clearInterval(intervalId);
+                }
+            }, 1000);
+        }
+
+        this.phaseExpirySubject.next(phaseDuration);
+
+        this.currentPhaseSubject.next(phaseStrategy);
     };
 
     public get currentPhase(): Observable<IPhaseStrategy> {
         return this.currentPhaseSubject.asObservable();
     };
+
+    public get phaseExpiry(): Observable<number> {
+        return this.phaseExpirySubject.asObservable();
+    }
 }

@@ -12,11 +12,12 @@ import { PlayerItemComponent } from "./players/player-item/player-item.component
 import { PickUpGameService } from "./pick-up-game.service";
 import { PlayerPickerComponent } from "./players/player-picker/player-picker.component";
 import { PhaseService } from "./phases/phase.service";
-import { PugPhaseFactory } from "./phases/pug-phase.factory";
+import { PugPhaseStrategyFactory } from "./phases/pug-phase-strategy.factory";
+import { PhaseTitleComponent } from "./phases/phase-title/phase-title.component";
 
 @NgModule({
     imports: [CommonModule, PugRoutingModule, TranslateModule.forChild()],
-    declarations: [LobbyComponent, PickUpGameComponent, PlayerItemComponent, PlayerPickerComponent],
-    providers: [PugService, PickUpGameService, PhaseService, PugPhaseFactory]
+    declarations: [LobbyComponent, PickUpGameComponent, PlayerItemComponent, PlayerPickerComponent, PhaseTitleComponent],
+    providers: [PugService, PickUpGameService, PhaseService, PugPhaseStrategyFactory]
 })
 export class PugModule { }

@@ -17,6 +17,7 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
+    "moment": "^2.18.1",
     "rxjs": "^5.4.1",
     "signalr": "^2.2.1",
     "systemjs": "0.19.40",

@@ -8,8 +8,8 @@ import { TranslateService } from "@ngx-translate/core";
 export class AppComponent {
 
     constructor(translateService: TranslateService) {
-        translateService.defaultLang = "en";
-        translateService.use("en");
+        translateService.defaultLang = "en-US";
+        translateService.use("en-US");
     }
 
 }

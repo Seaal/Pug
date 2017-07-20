@@ -13,7 +13,7 @@
         </ul>
     </div>
     <div class="action">
-        <h2>{{phaseString}}</h2>
+        <pug-phase-title [pug]="pug"></pug-phase-title>
         <pug-player-picker [players]="pug.pickablePlayers" (playerPicked)="onPlayerPicked($event)"></pug-player-picker>
     </div>
     <div class="team team-right">

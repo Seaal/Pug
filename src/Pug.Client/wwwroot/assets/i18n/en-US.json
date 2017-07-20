@@ -1,0 +1,11 @@
+{
+  "pug": {
+    "labels": {
+      "team": "{{name}} Team",
+      "team_members": "Team Members:"
+    },
+    "phases": {
+      "pick_player": "{{name}} Team's turn to pick"
+    }
+  }
+}
