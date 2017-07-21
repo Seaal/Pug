@@ -1,5 +1,7 @@
 ﻿import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class AuthenticationService {
@@ -9,6 +11,7 @@ export class AuthenticationService {
     private static expiresAtKey: string = "auth_expires_at";
 
     private auth0: auth0.WebAuth;
+    private userProfile: any;
 
     constructor(private router: Router) {
         this.auth0 = new auth0.WebAuth({
@@ -17,7 +20,7 @@ export class AuthenticationService {
             responseType: 'token id_token',
             audience: 'https://seaal-dev.auth0.com/userinfo',
             redirectUri: 'http://localhost:3000/auth/callback',
-            scope: 'openid'
+            scope: 'openid profile'
         });
     }
 
@@ -48,6 +51,32 @@ export class AuthenticationService {
         const expiresAt = JSON.parse(localStorage.getItem(AuthenticationService.expiresAtKey));
 
         return new Date().getTime() < expiresAt;
+    }
+
+    public getProfile(): Observable<any> {
+        const accessToken = localStorage.getItem(AuthenticationService.accessTokenKey);
+
+        if (!this.isAuthenticated()) {
+            return Observable.empty();
+        }
+
+        const profileSubject = new Subject<any>();
+
+        this.auth0.client.userInfo(accessToken, (err, profile) => {
+            if (profile) {
+                this.userProfile = profile;
+                profileSubject.next(profile);
+                profileSubject.complete();
+                console.log(profile);
+            }
+
+            if (err) {
+                profileSubject.error(err);
+                profileSubject.complete();
+            }
+        });
+
+        return profileSubject.asObservable();
     }
 
     private setSession(authResult: auth0.Auth0DecodedHash): void {

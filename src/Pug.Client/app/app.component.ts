@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { AuthenticationService } from "./authentication/authentication.service";
 
@@ -6,12 +6,16 @@ import { AuthenticationService } from "./authentication/authentication.service";
   selector: "pug-client-app",
   templateUrl: "/app/app.component.html"
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
     constructor(translateService: TranslateService,
                 private authenticationService: AuthenticationService) {
         translateService.defaultLang = "en-US";
         translateService.use("en-US");
+    }
+
+    public ngOnInit() {
+        this.authenticationService.getProfile();
     }
 
     public isAuthenticated(): boolean {
