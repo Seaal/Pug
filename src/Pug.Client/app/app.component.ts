@@ -8,6 +8,8 @@ import { AuthenticationService } from "./authentication/authentication.service";
 })
 export class AppComponent implements OnInit {
 
+    public nickname: string = "";
+
     constructor(translateService: TranslateService,
                 private authenticationService: AuthenticationService) {
         translateService.defaultLang = "en-US";
@@ -15,7 +17,9 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.authenticationService.getProfile();
+        this.authenticationService.getProfile().subscribe(profile => {
+            this.nickname = profile.nickname;
+        });
     }
 
     public isAuthenticated(): boolean {

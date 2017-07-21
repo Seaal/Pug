@@ -18,11 +18,11 @@ export class LobbyComponent implements OnInit {
         this.serverLogs = [];
 
         this.pugService.initListener().subscribe(
-            (server) => this.servers.push(server)
+            server => this.servers.push(server)
         );
 
         this.pugService.logListener().subscribe(
-            (log) => this.serverLogs.push(log)
+            log => this.serverLogs.push(log)
         );
 
         this.pugService.start();
@@ -30,13 +30,13 @@ export class LobbyComponent implements OnInit {
 
     public createServer(): void {
         this.pugService.createServer().subscribe(
-            (server) => this.servers.push(server)
+            server => this.servers.push(server)
         );
     }
 
     public deleteServer(serverId: string): void {
         this.pugService.deleteServer(serverId).subscribe(
-            (success) => this.servers = this.servers.filter((server) => server.id !== serverId)
+            success => this.servers = this.servers.filter(server => server.id !== serverId)
         );
     }
 }

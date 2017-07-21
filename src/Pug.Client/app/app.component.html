@@ -2,6 +2,8 @@
 
 <div class="pull-right">
     <div *ngIf="!isAuthenticated()">
+        Hello {{nickname}}
+
         <button class="btn btn-primary"
                 (click)="login()">
             Log In
