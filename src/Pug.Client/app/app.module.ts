@@ -9,6 +9,7 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { PugModule } from "./pug/pug.module";
 import { CommonModule } from "./common/common.module";
+import { AuthenticationModule } from "./authentication/authentication.module";
 
 export function createTranslateLoader(http: Http) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -19,6 +20,7 @@ export function createTranslateLoader(http: Http) {
         CommonModule,
         AppRoutingModule,
         PugModule,
+        AuthenticationModule,
         HttpModule,
         TranslateModule.forRoot({
             loader: {

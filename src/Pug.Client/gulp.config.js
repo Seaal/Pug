@@ -38,6 +38,7 @@
                 packages + "jquery/dist/jquery.js",
                 packages + "signalr/jquery.signalR.js",
                 packages + "moment/min/moment-with-locales.js",
+                packages + "auth0-js/build/auth0.js",
 
                 packages + "bootstrap/dist/css/bootstrap.css",
                 packages + "font-awesome/css/font-awesome.css"
