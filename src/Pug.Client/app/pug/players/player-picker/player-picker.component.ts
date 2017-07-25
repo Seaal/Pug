@@ -1,16 +1,17 @@
-﻿import { Component, Input, Output, EventEmitter } from "@angular/core";
+﻿import { Component, Input } from "@angular/core";
+
 import { Player } from "../player";
+import { IPhaseComponent } from "../../phases/iphase-component";
+import { PickUpGame } from "../../pick-up-game";
 
 @Component({
-    selector: "pug-player-picker",
     templateUrl: "app/pug/players/player-picker/player-picker.component.html"
 })
-export class PlayerPickerComponent {
-    @Input() public players: Player[];
+export class PlayerPickerComponent implements IPhaseComponent {
 
-    @Output() public playerPicked: EventEmitter<Player> = new EventEmitter<Player>();
+    @Input() public pug: PickUpGame;
 
     public onPlayerSelected(player: Player) {
-        this.playerPicked.emit(player);
+        alert(player.name);
     }
 }

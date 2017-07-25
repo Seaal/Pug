@@ -5,8 +5,7 @@
 <div class="teamArea">
     <pug-team [team]="pug.teams[0]"></pug-team>
     <div class="action">
-        <pug-phase-title [pug]="pug"></pug-phase-title>
-        <pug-player-picker [players]="pug.pickablePlayers" (playerPicked)="onPlayerPicked($event)"></pug-player-picker>
+        <pug-phase-container [pug]="pug"></pug-phase-container>
     </div>
     <pug-team [team]="pug.teams[1]"></pug-team>
 </div>

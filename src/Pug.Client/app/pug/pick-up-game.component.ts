@@ -1,11 +1,7 @@
 ﻿import { Component, OnInit } from "@angular/core";
-
-import { PickUpGameService } from "./pick-up-game.service";
-import { PickUpGame } from "./pick-up-game";
-import { Player } from "./players/player";
-import { PhaseService } from "./phases/phase.service";
-import { IPhaseStrategy } from "./phases/iphase-strategy";
 import { ActivatedRoute } from "@angular/router";
+
+import { PickUpGame } from "./pick-up-game";
 
 @Component({
     templateUrl: "app/pug/pick-up-game.component.html",
@@ -19,9 +15,5 @@ export class PickUpGameComponent implements OnInit {
 
     public ngOnInit(): void {
         this.pug = this.route.snapshot.data["pug"];
-    }
-
-    public onPlayerPicked(player: Player) {
-        alert(`${player.name} was picked!`);
     }
 }
