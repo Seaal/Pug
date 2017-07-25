@@ -1,4 +1,4 @@
-﻿import { Player } from "./players/player";
+﻿import { Player } from "./player";
 import { PugPhase } from "./phases/pug-phase";
 import { Team } from "./team/team";
 

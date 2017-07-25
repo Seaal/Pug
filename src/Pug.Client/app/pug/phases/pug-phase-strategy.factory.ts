@@ -1,10 +1,12 @@
 ﻿import { Injectable } from "@angular/core";
+
+import { TranslateService } from "@ngx-translate/core";
+
 import { PugPhaseType } from "./pug-phase-type";
 import { IPhaseStrategy } from "./iphase-strategy";
-import { PickPlayerPhaseStrategy } from "./pick-player-phase.strategy";
+import { PickPlayerPhaseStrategy } from "./pick-player/pick-player-phase.strategy";
 import { PugPhase } from "./pug-phase";
-import { PickPlayerPugPhase } from "./pick-player-pug-phase";
-import { TranslateService } from "@ngx-translate/core";
+import { PickPlayerPugPhase } from "./pick-player/pick-player-pug-phase";
 
 @Injectable()
 export class PugPhaseStrategyFactory {

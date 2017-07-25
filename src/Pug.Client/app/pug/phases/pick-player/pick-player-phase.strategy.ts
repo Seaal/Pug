@@ -1,12 +1,12 @@
 ﻿import { Type } from "@angular/core";
 
-import { IPhaseStrategy } from "./iphase-strategy";
-import { PickUpGame } from "../pick-up-game";
+import { IPhaseStrategy } from "../iphase-strategy";
+import { PickUpGame } from "../../pick-up-game";
 import { PickPlayerPugPhase } from "./pick-player-pug-phase";
 import { Observable } from "rxjs/Observable";
 import { TranslateService } from "@ngx-translate/core";
-import { BasePugPhaseStrategy } from "./base-pug-phase.strategy";
-import { PlayerPickerComponent } from "../players/player-picker/player-picker.component";
+import { BasePugPhaseStrategy } from "../base-pug-phase.strategy";
+import { PickPlayerPhaseComponent } from "./pick-player-phase.component";
 
 export class PickPlayerPhaseStrategy extends BasePugPhaseStrategy<PickPlayerPugPhase> implements IPhaseStrategy {
 
@@ -20,6 +20,6 @@ export class PickPlayerPhaseStrategy extends BasePugPhaseStrategy<PickPlayerPugP
     }
 
     public getPhaseComponent(): Type<any> {
-        return PlayerPickerComponent;
+        return PickPlayerPhaseComponent;
     }
 }

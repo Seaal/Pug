@@ -1,6 +1,6 @@
 ﻿import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
-import { Player } from "./players/player";
+import { Player } from "./player";
 import { PickUpGame } from "./pick-up-game";
 import { PhaseService } from "./phases/phase.service";
 

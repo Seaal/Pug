@@ -1,11 +1,11 @@
 ﻿import { Component, Input, Output, EventEmitter } from "@angular/core";
 
-import { Player } from "../player";
+import { Player } from "../../../player";
 
 @Component({
     selector: "pug-player-item",
-    templateUrl: "app/pug/players/player-item/player-item.component.html",
-    styleUrls: ["app/pug/players/player-item/player-item.component.css"]
+    templateUrl: "app/pug/phases/pick-player/player-item/player-item.component.html",
+    styleUrls: ["app/pug/phases/pick-player/player-item/player-item.component.css"]
 })
 export class PlayerItemComponent {
     @Input() public player: Player;

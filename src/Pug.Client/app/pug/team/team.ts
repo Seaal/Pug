@@ -1,4 +1,4 @@
-﻿import { Player } from "../players/player";
+﻿import { Player } from "../player";
 
 export interface Team {
     name: string;
