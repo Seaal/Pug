@@ -9,6 +9,7 @@ var args = require("yargs").argv;
 var config = require("./gulp.config")();
 var tsProject = $.typescript.createProject("tsconfig.json");
 
+var karmaServer = require("karma").Server;
 
 gulp.task("clean-styles", function () {
 
@@ -66,13 +67,6 @@ gulp.task("typescript", ["clean-typescript", "lint-typescript"], function () {
         .pipe($.sourcemaps.write("."))
         .pipe(gulp.dest(config.app.output));
 
-});
-
-gulp.task("clean-coverage", function () {
-
-    log("Cleaning coverage of unit tests");
-
-    del(config.coverage + "**/*");
 });
 
 gulp.task("sync-typescript", ["typescript"], function () {
