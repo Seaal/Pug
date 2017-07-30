@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='build-dev' ProjectOpened='browsersync, watch-tests' />
+﻿/// <binding AfterBuild='build-dev' ProjectOpened='dev-server' />
 var gulp = require("gulp");
 var $ = require("gulp-load-plugins")({ lazy: true });
 
@@ -10,6 +10,7 @@ var config = require("./gulp.config")();
 var tsProject = $.typescript.createProject("tsconfig.json");
 
 var karmaServer = require("karma").Server;
+var karmaRunner = require("karma").runner;
 
 gulp.task("clean-styles", function () {
 
@@ -70,9 +71,8 @@ gulp.task("typescript", ["clean-typescript", "lint-typescript"], function () {
 });
 
 gulp.task("sync-typescript", ["typescript"], function () {
-
+    runKarmaTests();
     browserSync.reload();
-
 });
 
 gulp.task("clean-templates", function () {
@@ -93,6 +93,7 @@ gulp.task("templates", ["clean-templates"], function () {
 });
 
 gulp.task("sync-templates", ["templates"], function () {
+    runKarmaTests();
     browserSync.reload();
 });
 
@@ -192,7 +193,16 @@ gulp.task("fonts", ["clean-fonts"], function () {
 
 });
 
-gulp.task("build-dev", ["libs", "typescript", "styles", "templates", "component-styles", "fonts"], function () {
+gulp.task("test", ["typescript", "templates", "component-styles"], function (done) {
+    log("Testing clientside code");
+
+    new karmaServer({
+        configFile: __dirname + "/" + config.karmaConfig,
+        singleRun: true
+    }, done).start();
+});
+
+gulp.task("build-dev", ["libs", "typescript", "styles", "templates", "component-styles", "fonts", "test"], function () {
 
     log("Building for development");
 
@@ -203,7 +213,7 @@ gulp.task("build-dev", ["libs", "typescript", "styles", "templates", "component-
         .pipe(gulp.dest(config.home));
 });
 
-gulp.task("browsersync", function () {
+gulp.task("dev-server", function () {
 
     log("Starting up Browsersync server");
 
@@ -232,8 +242,19 @@ gulp.task("browsersync", function () {
     gulp.watch(config.app.typescript, { cwd: "./" }, ["sync-typescript"]);
     gulp.watch(config.app.templates, { cwd: "./" }, ["sync-templates"]);
     gulp.watch(config.app.styles, { cwd: "./" }, ["sync-component-styles"]);
+
+    log("Starting up Karma server");
+
+    new karmaServer({
+        configFile: __dirname + "/" + config.karmaConfig,
+        singleRun: false
+    }).start();
 });
 
 function log(message) {
     $.util.log($.util.colors.yellow(message));
+}
+
+function runKarmaTests() {
+    karmaRunner.run({ port: 9876 }, function () { });
 }

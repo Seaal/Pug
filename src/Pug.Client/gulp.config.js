@@ -63,7 +63,8 @@
 
         typings: "typings/index.d.ts",
         typingsConfig: "typings.json",
-        coverage: "coverage/",
+
+        karmaConfig: "karma.conf.js",
 
         config: [
             "./package.json",
