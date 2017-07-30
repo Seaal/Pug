@@ -34,9 +34,10 @@ module.exports = function (config) {
         "node_modules/zone.js/dist/async-test.js",
         "node_modules/zone.js/dist/fake-async-test.js",
 
-        // RxJs
+        // External Modules
         { pattern: "node_modules/rxjs/**/*.js", included: false, watched: false },
         { pattern: "node_modules/rxjs/**/*.js.map", included: false, watched: false },
+        { pattern: "node_modules/@ngx-translate/core/bundles/*.umd.js", included: false, watched: false },
 
         // Paths loaded via module imports:
         // Angular itself
@@ -49,7 +50,7 @@ module.exports = function (config) {
         // transpiled application & spec code paths loaded via module imports
         { pattern: appBase + "**/*.js", included: false, watched: true },
 
-        // Asset (HTML & CSS) paths loaded via Angular"s component compiler
+        // Asset (HTML & CSS) paths loaded via Angular's component compiler
         // (these paths need to be rewritten, see proxies section)
         { pattern: appBase + "**/*.html", included: false, watched: true },
         { pattern: appBase + "**/*.css", included: false, watched: true },
@@ -60,7 +61,8 @@ module.exports = function (config) {
     ],
 
     proxies: {
-        "/base/wwwroot/libs/": "/base/node_modules/"
+        "/base/wwwroot/libs/" : "/base/node_modules/",
+        "/app/" : "/base/wwwroot/app/"
     },
 
     // list of files to exclude
@@ -102,7 +104,7 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous

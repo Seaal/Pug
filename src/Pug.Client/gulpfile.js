@@ -234,36 +234,6 @@ gulp.task("browsersync", function () {
     gulp.watch(config.app.styles, { cwd: "./" }, ["sync-component-styles"]);
 });
 
-gulp.task("build-dev-teamcity", ["build-dev"], function () {
-
-    log("Building for Team City deployment to development.");
-
-    var buildNumber = args.build;
-
-    if (!buildNumber) {
-        throw ("No Build Number provided");
-    }
-
-    var packageJson = require("./package.json");
-
-    var buildIndex = packageJson.version.indexOf("-");
-
-    var newVersion = packageJson.version;
-
-    if (buildIndex >= 0) {
-        newVersion = newVersion.substring(0, buildIndex);
-    }
-
-    newVersion += "-build" + buildNumber;
-
-    gulp.src(config.config)
-        .pipe($.bump({ version: newVersion, type: "prelease" }))
-        .pipe(gulp.dest("./"));
-
-    console.log("##teamcity[buildNumber '" + newVersion + "']");
-
-});
-
 function log(message) {
     $.util.log($.util.colors.yellow(message));
 }
