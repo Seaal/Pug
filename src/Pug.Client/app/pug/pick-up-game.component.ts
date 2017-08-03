@@ -4,8 +4,9 @@ import { ActivatedRoute } from "@angular/router";
 import { PickUpGame } from "./pick-up-game";
 
 @Component({
-    templateUrl: "app/pug/pick-up-game.component.html",
-    styleUrls: ["app/pug/pick-up-game.component.css"]
+    moduleId: module.id,
+    templateUrl: "pick-up-game.component.html",
+    styleUrls: ["pick-up-game.component.css"]
 })
 export class PickUpGameComponent implements OnInit {
 

@@ -6,8 +6,9 @@ import { PhaseHostDirective } from "./phase-host.directive";
 import { IPhaseComponent } from "../iphase-component";
 
 @Component({
+    moduleId: module.id,
     selector: "pug-phase-container",
-    templateUrl: "app/pug/phases/phase-container/phase-container.component.html"
+    templateUrl: "phase-container.component.html"
 })
 export class PhaseContainerComponent implements OnInit {
 

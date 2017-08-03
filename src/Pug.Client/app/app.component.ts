@@ -2,8 +2,9 @@ import { Component } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: "pug-client-app",
-  templateUrl: "/app/app.component.html"
+    moduleId: module.id,
+    selector: "pug-client-app",
+    templateUrl: "app.component.html"
 })
 export class AppComponent {
 

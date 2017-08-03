@@ -4,8 +4,9 @@ import { PickUpGame } from "../../pick-up-game";
 import { PhaseService } from "../phase.service";
 
 @Component({
+    moduleId: module.id,
     selector: "pug-phase-title",
-    templateUrl: "app/pug/phases/phase-title/phase-title.component.html"
+    templateUrl: "phase-title.component.html"
 })
 export class PhaseTitleComponent implements OnInit {
 

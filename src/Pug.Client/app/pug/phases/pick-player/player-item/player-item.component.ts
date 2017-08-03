@@ -3,9 +3,10 @@
 import { Player } from "../../../player";
 
 @Component({
+    moduleId: module.id,
     selector: "pug-player-item",
-    templateUrl: "app/pug/phases/pick-player/player-item/player-item.component.html",
-    styleUrls: ["app/pug/phases/pick-player/player-item/player-item.component.css"]
+    templateUrl: "player-item.component.html",
+    styleUrls: ["player-item.component.css"]
 })
 export class PlayerItemComponent {
     @Input() public player: Player;

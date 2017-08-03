@@ -4,8 +4,9 @@ import { Server } from "./server";
 import { PugService } from "./pug.service";
 
 @Component({
-    templateUrl: "/app/pug/lobby.component.html",
-    styleUrls: ["app/pug/lobby.component.css"]
+    moduleId: module.id,
+    templateUrl: "lobby.component.html",
+    styleUrls: ["lobby.component.css"]
 })
 export class LobbyComponent implements OnInit {
     public servers: Server[];

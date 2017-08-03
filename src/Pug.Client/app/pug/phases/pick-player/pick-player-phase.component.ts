@@ -5,7 +5,8 @@ import { PickUpGame } from "../../pick-up-game";
 import { Player } from "../../player";
 
 @Component({
-    templateUrl: "app/pug/phases/pick-player/pick-player-phase.component.html"
+    moduleId: module.id,
+    templateUrl: "pick-player-phase.component.html"
 })
 export class PickPlayerPhaseComponent implements IPhaseComponent {
 
