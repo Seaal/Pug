@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0B800FC5-2F59-45D9-8862-1909B287973B}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Client", "src\Pug.Client\Pug.Client.csproj", "{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Server.ServerManager", "src\Pug.Server.ServerManager\Pug.Server.ServerManager.csproj", "{CF02275D-E906-49E3-89BE-B5F6CAC839F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Client.ViewModels", "Pug.Client.ViewModels\Pug.Client.ViewModels.csproj", "{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7} = {0B800FC5-2F59-45D9-8862-1909B287973B}
 		{CF02275D-E906-49E3-89BE-B5F6CAC839F3} = {0B800FC5-2F59-45D9-8862-1909B287973B}
+		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1} = {0B800FC5-2F59-45D9-8862-1909B287973B}
 	EndGlobalSection
 EndGlobal

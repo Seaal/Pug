@@ -5,7 +5,7 @@ import { Team } from "./team/team";
 export interface PickUpGame {
     id: number;
     path: string[];
-    pickablePlayers: Player[];
     currentPhase: PugPhase;
     teams: Team[];
+    pickablePlayers: Player[];
 }
