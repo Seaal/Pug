@@ -27,6 +27,7 @@
             dynamicSrc: [
                 packages + "@angular/**/bundles/*.umd.js",
                 packages + "rxjs/**/*{.js,.js.map}",
+                packages + "tslib/tslib.js",
                 "!" + packages + "rxjs/bundles/*",
                 packages + "@ngx-translate/**/bundles/*"
             ],

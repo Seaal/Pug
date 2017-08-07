@@ -16,6 +16,7 @@
             // angular bundles
             '@angular/core': "npm:@angular/core/bundles/core.umd.js",
             '@angular/common': "npm:@angular/common/bundles/common.umd.js",
+            '@angular/common/http': "npm:@angular/common/bundles/common-http.umd.js",
             '@angular/compiler': "npm:@angular/compiler/bundles/compiler.umd.js",
             '@angular/platform-browser': "npm:@angular/platform-browser/bundles/platform-browser.umd.js",
             '@angular/platform-browser-dynamic': "npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js",
@@ -26,7 +27,8 @@
             // other libraries
             'rxjs': "npm:rxjs",
             "@ngx-translate/core": "npm:@ngx-translate/core/bundles/core.umd.js",
-            "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/http-loader.umd.js"
+            "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/http-loader.umd.js",
+            "tslib": "npm:tslib/tslib.js"
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -41,6 +43,9 @@
                 defaultExtension: "js"
             },
             "@ngx-translate/http-loader": {
+                defaultExtension: "js"
+            },
+            tslib: {
                 defaultExtension: "js"
             }
         }

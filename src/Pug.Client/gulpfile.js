@@ -193,7 +193,7 @@ gulp.task("fonts", ["clean-fonts"], function () {
 
 });
 
-gulp.task("test", ["typescript", "templates", "component-styles"], function (done) {
+gulp.task("test", ["typescript", "templates", "component-styles", "libs"], function (done) {
     log("Testing clientside code");
 
     new karmaServer({

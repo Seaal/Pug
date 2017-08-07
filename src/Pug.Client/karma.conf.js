@@ -38,6 +38,7 @@ module.exports = function (config) {
         { pattern: "node_modules/rxjs/**/*.js", included: false, watched: false },
         { pattern: "node_modules/rxjs/**/*.js.map", included: false, watched: false },
         { pattern: "node_modules/@ngx-translate/core/bundles/*.umd.js", included: false, watched: false },
+        { pattern: "node_modules/tslib/tslib.js", included: false, watched: false },
 
         // Paths loaded via module imports:
         // Angular itself
@@ -79,7 +80,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: "dots", "progress"
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ["progress", "coverage", "remap-coverage"],
+    reporters: ["dots", "coverage", "remap-coverage"],
 
     coverageReporter: {
         type: "in-memory"

@@ -18,9 +18,10 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "moment": "^2.18.1",
-    "rxjs": "^5.4.1",
+    "rxjs": "^5.4.2",
     "signalr": "^2.2.1",
     "systemjs": "0.19.40",
+    "tslib": "^1.7.1",
     "zone.js": "^0.8.12"
   },
   "devDependencies": {
@@ -47,7 +48,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-remap-coverage": "^0.1.4",
     "tslint": "^4.3.1",
-    "typescript": "^2.1.5",
+    "typescript": "^2.4.2",
     "yargs": "^6.6.0"
   }
 }
