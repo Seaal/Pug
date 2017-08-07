@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Pug.Server.ServerManager;
 using PugClient.Hubs;
 using Microsoft.Owin.Builder;
 using Owin;
 using Microsoft.AspNet.SignalR;
-using Pug.Client.Hubs;
+using SimpleInjector;
+using Pug.Client.Config;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace Pug.Client
 {
     public class Startup
     {
+        private Container container = new Container();
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -29,24 +31,20 @@ namespace Pug.Client
 
             JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
 
-            services.Add(new ServiceDescriptor(
-                typeof(JsonSerializer),
-                provider => serializer,
-                ServiceLifetime.Transient
-            ));
-
-            services.AddSingleton<IGameServerManager, GameServerManager>();
-            services.AddTransient<PugHub>();
+            services.IntegrateSimpleInjector(container);
 
             services.AddMvc();
 
             //Add Dependency Injection to SignalR
-            GlobalHost.DependencyResolver = new InjectionDependencyResolver(services.BuildServiceProvider());
+            GlobalHost.DependencyResolver.Register(typeof(IHubActivator), () => new SimpleInjectorHubActivtor(container));
+            GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => serializer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.InitializeContainer(container);
+
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
