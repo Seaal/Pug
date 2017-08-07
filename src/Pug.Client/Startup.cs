@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using PugClient.Hubs;
-using Microsoft.Owin.Builder;
-using Owin;
-using Microsoft.AspNet.SignalR;
 using SimpleInjector;
 using Pug.Client.Config;
-using Microsoft.AspNet.SignalR.Hubs;
 
 namespace Pug.Client
 {
@@ -24,20 +15,11 @@ namespace Pug.Client
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
-            {
-                ContractResolver = new SignalRContractResolver()
-            };
-
-            JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
-
             services.IntegrateSimpleInjector(container);
 
             services.AddMvc();
 
-            //Add Dependency Injection to SignalR
-            GlobalHost.DependencyResolver.Register(typeof(IHubActivator), () => new SimpleInjectorHubActivtor(container));
-            GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => serializer);
+            services.AddSignalR(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,29 +36,16 @@ namespace Pug.Client
 
             app.UseStaticFiles();
 
-            app.UseOwin(addToPipeline =>
-            {
-                addToPipeline(next =>
-                {
-                    var appBuilder = new AppBuilder();
-                    appBuilder.Properties["builder.DefaultApp"] = next;
-
-                    IAppBuilder iAppBuilder = appBuilder;
-
-                    iAppBuilder.MapSignalR();
-
-                    return appBuilder.Build<Func<IDictionary<string, object>, Task>>();
-                });
-            });
+            app.UseSignalR();
 
             app.UseMvc(routes =>
-               {
-                   routes.MapRoute(
-                    name: "default",
-                    template: "{*.}",
-                    defaults: new { controller = "Home", action = "Index" }
-                    );
-               });
+            {
+                routes.MapRoute(
+                name: "default",
+                template: "{*.}",
+                defaults: new { controller = "Home", action = "Index" }
+                );
+            });
         }
     }
 }

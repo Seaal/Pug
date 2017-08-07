@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.SignalR.Infrastructure;
 
-namespace PugClient.Hubs
+namespace Pug.Client.Config
 {
     public class SignalRContractResolver : IContractResolver
     {
