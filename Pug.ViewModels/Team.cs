@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Pug.Client.ViewModels
+namespace Pug.ViewModels
 {
     public class Team
     {

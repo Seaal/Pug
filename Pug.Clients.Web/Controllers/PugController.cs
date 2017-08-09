@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pug.Client.ViewModels;
-using Pug.Client.ViewModels.Phases;
+using Pug.ViewModels;
+using Pug.ViewModels.Phases;
 using System;
 using System.Collections.Generic;
 using System.Linq;

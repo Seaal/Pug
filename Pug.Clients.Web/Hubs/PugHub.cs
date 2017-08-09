@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Pug.Server.ServerManager;
+using Pug.ServerManager;
 using Microsoft.AspNet.SignalR;
 
 namespace PugClient.Hubs

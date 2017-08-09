@@ -1,4 +1,4 @@
-﻿namespace Pug.Client.ViewModels
+﻿namespace Pug.ViewModels
 {
     public class Player
     {

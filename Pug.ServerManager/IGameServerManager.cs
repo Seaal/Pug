@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pug.Server.ServerManager
+namespace Pug.ServerManager
 {
     public interface IGameServerManager
     {

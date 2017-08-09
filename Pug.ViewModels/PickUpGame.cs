@@ -1,7 +1,7 @@
-﻿using Pug.Client.ViewModels.Phases;
+﻿using Pug.ViewModels.Phases;
 using System.Collections.Generic;
 
-namespace Pug.Client.ViewModels
+namespace Pug.ViewModels
 {
     public class PickUpGame
     {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Pug.Server.ServerManager;
+using Pug.ServerManager;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
