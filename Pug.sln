@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0B800FC5-2F59-45D9-8862-1909B287973B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.ServerManager", "Pug.ServerManager\Pug.ServerManager.csproj", "{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77365D29-9526-4E13-89FD-80E9797E6332}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.ViewModels", "Pug.ViewModels\Pug.ViewModels.csproj", "{FACAC96F-074F-4352-B7E9-C11F13668DDC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Client", "src\Pug.Client\Pug.Client.csproj", "{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Server.ServerManager", "src\Pug.Server.ServerManager\Pug.Server.ServerManager.csproj", "{CF02275D-E906-49E3-89BE-B5F6CAC839F3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Client.ViewModels", "Pug.Client.ViewModels\Pug.Client.ViewModels.csproj", "{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Clients.Web", "Pug.Clients.Web\Pug.Clients.Web.csproj", "{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,25 +15,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF02275D-E906-49E3-89BE-B5F6CAC839F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5231EE3D-6071-45A4-A808-F5A6E6C8F8C7} = {0B800FC5-2F59-45D9-8862-1909B287973B}
-		{CF02275D-E906-49E3-89BE-B5F6CAC839F3} = {0B800FC5-2F59-45D9-8862-1909B287973B}
-		{613A55D3-B0EB-4613-8EAC-DF72307CE0D1} = {0B800FC5-2F59-45D9-8862-1909B287973B}
 	EndGlobalSection
 EndGlobal
