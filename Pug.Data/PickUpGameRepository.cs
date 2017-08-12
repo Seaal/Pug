@@ -1,9 +1,6 @@
 ﻿using MongoDB.Bson;
-using Pug.Data.Models;
+using Pug.Data.Models.Pugs;
 using Seaal.Data.MongoDB;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Pug.Data

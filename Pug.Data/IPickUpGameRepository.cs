@@ -1,4 +1,4 @@
-﻿using Pug.Data.Models;
+﻿using Pug.Data.Models.Pugs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
