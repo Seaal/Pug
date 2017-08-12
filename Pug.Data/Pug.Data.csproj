@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pug.Data.Models\Pug.Data.Models.csproj" />
+    <ProjectReference Include="..\Seaal.Data.MongoDB\Seaal.Data.MongoDB.csproj" />
+  </ItemGroup>
+
+</Project>
