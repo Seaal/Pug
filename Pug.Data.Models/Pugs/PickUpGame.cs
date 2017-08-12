@@ -1,10 +1,7 @@
 ﻿using MongoDB.Bson;
 using Seaal.Data.MongoDB;
-using System;
+using Pug.Data.Models.Pugs.Phases;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pug.Data.Models.Pugs
 {

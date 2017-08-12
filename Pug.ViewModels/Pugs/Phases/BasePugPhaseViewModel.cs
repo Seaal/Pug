@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Pug.ViewModels.Phases
+namespace Pug.Api.ViewModels.Pugs.Phases
 {
-    public abstract class BasePugPhase
+    public abstract class BasePugPhaseViewModel
     {
         public int Type { get; set; }
         public DateTime Expiry { get; set; }

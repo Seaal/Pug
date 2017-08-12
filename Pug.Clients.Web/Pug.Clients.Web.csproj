@@ -21,8 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pug.Api.Logic\Pug.Api.Logic.csproj" />
     <ProjectReference Include="..\Pug.ServerManager\Pug.ServerManager.csproj" />
-    <ProjectReference Include="..\Pug.ViewModels\Pug.ViewModels.csproj" />
+    <ProjectReference Include="..\Pug.ViewModels\Pug.Api.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

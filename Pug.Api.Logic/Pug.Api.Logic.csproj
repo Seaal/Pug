@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pug.Data\Pug.Data.csproj" />
+    <ProjectReference Include="..\Pug.ViewModels\Pug.Api.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.ServerManager", "Pug.ServerManager\Pug.ServerManager.csproj", "{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.ViewModels", "Pug.ViewModels\Pug.ViewModels.csproj", "{FACAC96F-074F-4352-B7E9-C11F13668DDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Api.ViewModels", "Pug.ViewModels\Pug.Api.ViewModels.csproj", "{FACAC96F-074F-4352-B7E9-C11F13668DDC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Clients.Web", "Pug.Clients.Web\Pug.Clients.Web.csproj", "{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}"
 EndProject
@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seaal.Data.MongoDB", "Seaal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Data", "Pug.Data\Pug.Data.csproj", "{60413948-4A3A-4824-8712-7C4D68612C5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Data.Models", "Pug.Data.Models\Pug.Data.Models.csproj", "{0282A3FC-8C4A-4BFE-9B26-A830FB5F09E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Data.Models", "Pug.Data.Models\Pug.Data.Models.csproj", "{0282A3FC-8C4A-4BFE-9B26-A830FB5F09E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Api.Logic", "Pug.Api.Logic\Pug.Api.Logic.csproj", "{704ABD2B-74A4-43FE-88E9-08DE7907C808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{0282A3FC-8C4A-4BFE-9B26-A830FB5F09E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0282A3FC-8C4A-4BFE-9B26-A830FB5F09E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0282A3FC-8C4A-4BFE-9B26-A830FB5F09E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
