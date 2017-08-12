@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pug.Api.ViewModels\Pug.Api.ViewModels.csproj" />
     <ProjectReference Include="..\Pug.Data\Pug.Data.csproj" />
-    <ProjectReference Include="..\Pug.ViewModels\Pug.Api.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.ServerManager", "Pug.ServerManager\Pug.ServerManager.csproj", "{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Api.ViewModels", "Pug.ViewModels\Pug.Api.ViewModels.csproj", "{FACAC96F-074F-4352-B7E9-C11F13668DDC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Clients.Web", "Pug.Clients.Web\Pug.Clients.Web.csproj", "{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seaal.Data.MongoDB", "Seaal.Data.MongoDB\Seaal.Data.MongoDB.csproj", "{BDDAAFE9-2354-4EC5-877D-0E23568538AE}"
@@ -15,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Data", "Pug.Data\Pug.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Data.Models", "Pug.Data.Models\Pug.Data.Models.csproj", "{0282A3FC-8C4A-4BFE-9B26-A830FB5F09E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Api.Logic", "Pug.Api.Logic\Pug.Api.Logic.csproj", "{704ABD2B-74A4-43FE-88E9-08DE7907C808}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Api.Logic", "Pug.Api.Logic\Pug.Api.Logic.csproj", "{704ABD2B-74A4-43FE-88E9-08DE7907C808}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Api.ViewModels", "Pug.Api.ViewModels\Pug.Api.ViewModels.csproj", "{DDFEE3D2-2651-47AD-999F-026D04186A87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ED428BE-A16C-4F59-A662-2CBE61B45DC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FACAC96F-074F-4352-B7E9-C11F13668DDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D40AE2CD-3C2B-41CA-8661-1376AAB4BB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{704ABD2B-74A4-43FE-88E9-08DE7907C808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFEE3D2-2651-47AD-999F-026D04186A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFEE3D2-2651-47AD-999F-026D04186A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFEE3D2-2651-47AD-999F-026D04186A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFEE3D2-2651-47AD-999F-026D04186A87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
