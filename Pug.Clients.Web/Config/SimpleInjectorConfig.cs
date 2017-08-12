@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Pug.ServerManager;
+using Seaal.DependencyInjection;
+using Seaal.DependencyInjection.SimpleInjector;
 using SimpleInjector;
 using SimpleInjector.Integration.AspNetCore.Mvc;
 using SimpleInjector.Lifestyles;
@@ -39,6 +41,12 @@ namespace Pug.Client.Config
             // Cross-wire ASP.NET services
             container.CrossWire<ILoggerFactory>(app);
             container.CrossWire<JsonSerializer>(app);
+
+            TypeRegistrar registrar = new TypeRegistrar();
+
+            registrar.RegisterTypesFromReferencedAssemblies(new SimpleInjectorAdapter(container), (an) => an.FullName.StartsWith("Seaal") || an.FullName.StartsWith("Pug"));
+
+            container.Verify();
         }
     }
 }

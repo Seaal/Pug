@@ -2,7 +2,6 @@
 using Pug.Data;
 using Pug.Data.Models.Pugs;
 using Pug.Api.ViewModels.Pugs;
-using Pug.Api.ViewModels.Pugs.Phases;
 
 namespace Pug.Api.Logic
 {
@@ -19,7 +18,10 @@ namespace Pug.Api.Logic
         {
             PickUpGame pug = await _pugRepository.Get(id);
 
-            return new PickUpGameViewModel();
+            return new PickUpGameViewModel()
+            {
+                Id = pug.Id.ToString()
+            };
         }
     }
 }
