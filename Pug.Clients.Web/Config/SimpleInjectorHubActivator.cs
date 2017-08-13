@@ -3,11 +3,11 @@ using SimpleInjector;
 
 namespace Pug.Client.Config
 {
-    public class SimpleInjectorHubActivtor : IHubActivator
+    public class SimpleInjectorHubActivator : IHubActivator
     {
         private readonly Container _container;
 
-        public SimpleInjectorHubActivtor(Container container)
+        public SimpleInjectorHubActivator(Container container)
         {
             _container = container;
         }

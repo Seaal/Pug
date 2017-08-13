@@ -35,13 +35,11 @@ namespace Pug.Client.Config
             container.RegisterMvcControllers(app);
             container.RegisterMvcViewComponents(app);
 
-            // Add application services
-            container.Register<IGameServerManager, GameServerManager>();
-
             // Cross-wire ASP.NET services
             container.CrossWire<ILoggerFactory>(app);
             container.CrossWire<JsonSerializer>(app);
 
+            // Add application services
             TypeRegistrar registrar = new TypeRegistrar();
 
             registrar.RegisterTypesFromReferencedAssemblies(new SimpleInjectorAdapter(container), (an) => an.FullName.StartsWith("Seaal") || an.FullName.StartsWith("Pug"));

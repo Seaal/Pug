@@ -27,7 +27,7 @@ namespace Pug.Client.Config
             GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => serializer);
 
             //Add Dependency Injection to SignalR
-            IHubActivator hubActivator = new SimpleInjectorHubActivtor(container);
+            IHubActivator hubActivator = new SimpleInjectorHubActivator(container);
 
             GlobalHost.DependencyResolver.Register(typeof(IHubActivator), () => hubActivator);
         }

@@ -8,6 +8,9 @@ namespace Seaal.DependencyInjection
 {
     public interface IContainer
     {
+        void Register<TInterface, TImplementation>() where TImplementation : class, TInterface where TInterface : class;
         void RegisterSingleton<TInterface, TImplementation>() where TImplementation : class, TInterface where TInterface : class;
+
+        void RegisterMultiple(IEnumerable<Registration> registrations);
     }
 }
