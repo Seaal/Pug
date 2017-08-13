@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
+import { LocalizationService } from "./common/localization.service";
 
 @Component({
     moduleId: module.id,
@@ -8,9 +8,9 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
 
-    constructor(translateService: TranslateService) {
-        translateService.defaultLang = "en-US";
-        translateService.use("en-US");
+    constructor(localizationService: LocalizationService) {
+        localizationService.fallbackLanguage = "en-US";
+        localizationService.setLanguage("en-US");
     }
 
 }

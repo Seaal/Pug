@@ -2,6 +2,7 @@
 import { IPhaseStrategy } from "../iphase-strategy";
 import { PickUpGame } from "../../pick-up-game";
 import { PhaseService } from "../phase.service";
+import { Localization } from "../../../common/localization";
 
 @Component({
     moduleId: module.id,
@@ -12,7 +13,7 @@ export class PhaseTitleComponent implements OnInit {
 
     @Input() public pug: PickUpGame;
 
-    public title: string;
+    public title: Localization;
     public timeRemaining: number;
 
     constructor(private phaseService: PhaseService) { }
@@ -20,7 +21,7 @@ export class PhaseTitleComponent implements OnInit {
     public ngOnInit(): void {
 
         this.phaseService.currentPhase.subscribe((phaseStrategy) =>
-            phaseStrategy.getPhaseActionMessage(this.pug).subscribe((title) => this.title = title)
+            this.title = phaseStrategy.getPhaseActionMessage(this.pug)
         );
 
         this.phaseService.phaseExpiry.subscribe((timeRemaining) =>

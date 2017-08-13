@@ -1,22 +1,25 @@
 ﻿import { Type } from "@angular/core";
 
+import { Observable } from "rxjs/Observable";
+
 import { IPhaseStrategy } from "../iphase-strategy";
 import { PickUpGame } from "../../pick-up-game";
-import { PickPlayerPugPhase } from "./pick-player-pug-phase";
-import { Observable } from "rxjs/Observable";
-import { TranslateService } from "@ngx-translate/core";
+import { PickPlayerPugPhase } from "./pick-player-pug-phase"
 import { BasePugPhaseStrategy } from "../base-pug-phase.strategy";
 import { PickPlayerPhaseComponent } from "./pick-player-phase.component";
+import { Localization } from "../../../common/localization";
 
 export class PickPlayerPhaseStrategy extends BasePugPhaseStrategy<PickPlayerPugPhase> implements IPhaseStrategy {
 
-    constructor(phase: PickPlayerPugPhase,
-                private translateService: TranslateService) {
+    constructor(phase: PickPlayerPugPhase) {
         super(phase);
     }
 
-    public getPhaseActionMessage(pug: PickUpGame): Observable<string> {
-        return this.translateService.get("pug.phases.pick_player", pug.teams[this.phase.teamIndex]);
+    public getPhaseActionMessage(pug: PickUpGame): Localization {
+        return {
+            key: "pug.phases.pick_player",
+            data: pug.teams[this.phase.teamIndex]
+        };
     }
 
     public getPhaseComponent(): Type<any> {

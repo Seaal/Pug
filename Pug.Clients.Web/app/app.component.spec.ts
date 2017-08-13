@@ -1,9 +1,8 @@
 ﻿import { ComponentFixture, TestBed, async, inject } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 
-import { TranslateService } from "@ngx-translate/core";
-
 import { AppComponent } from "./app.component";
+import { LocalizationService } from "./common/localization.service";
 
 describe("AppComponent", () => {
 
@@ -11,13 +10,13 @@ describe("AppComponent", () => {
     let fixture: ComponentFixture<AppComponent>;
 
     beforeEach(async(() => {
-        const translateServiceStub = jasmine.createSpyObj("translateService", ["use"]);
+        const localizationServiceStub = jasmine.createSpyObj("localizationService", ["setLanguage"]);
 
         TestBed.configureTestingModule({
             declarations: [AppComponent],
             imports: [RouterTestingModule],
             providers: [
-                { provide: TranslateService, useValue: translateServiceStub }
+                { provide: LocalizationService, useValue: localizationServiceStub }
             ]
         })
         .compileComponents();
@@ -29,16 +28,16 @@ describe("AppComponent", () => {
     });
 
     describe("ngOnInit", () => {
-        it("should set language default to en-US", inject([TranslateService], (translateService: TranslateService) => {
+        it("should set fallback language to en-US", inject([LocalizationService], (localizationService: LocalizationService) => {
             fixture.detectChanges();
 
-            expect(translateService.defaultLang).toBe("en-US");
+            expect(localizationService.fallbackLanguage).toBe("en-US");
         }));
 
-        it("should use en-US as language", inject([TranslateService], (translateService: TranslateService) => {
+        it("should use en-US as language", inject([LocalizationService], (localizationService: LocalizationService) => {
             fixture.detectChanges();
 
-            expect(translateService.use).toHaveBeenCalledWith("en-US");
+            expect(localizationService.setLanguage).toHaveBeenCalledWith("en-US");
         }));
     });
 });
