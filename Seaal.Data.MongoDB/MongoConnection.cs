@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,6 +27,12 @@ namespace Seaal.Data.MongoDB
             {
                 throw new ArgumentNullException(nameof(config.ConnectionString));
             }
+
+            ConventionPack conventionPack = new ConventionPack();
+
+            conventionPack.Add(new CamelCaseElementNameConvention());
+
+            ConventionRegistry.Register("Seaal Standard Conventions", conventionPack, t => true);
 
             MongoClient client = new MongoClient(config.ConnectionString);
 

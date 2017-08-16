@@ -12,7 +12,7 @@ export class PickUpGameService {
                 private phaseService: PhaseService) { }
 
     public getPug(): Observable<PickUpGame> {
-        return this.requestService.get<PickUpGame>(`pug/1`).do((pug) => {
+        return this.requestService.get<PickUpGame>(`pug/5993a9e08e45e9871eec42df`).do((pug) => {
             this.phaseService.setCurrentPhase(pug.currentPhase);
         });
     }
