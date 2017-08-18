@@ -5,6 +5,7 @@ using Pug.Api.ViewModels.Pugs;
 using System.Linq;
 using Pug.Api.ViewModels.Pugs.Phases;
 using System;
+using Pug.Domain;
 
 namespace Pug.Api.Logic
 {

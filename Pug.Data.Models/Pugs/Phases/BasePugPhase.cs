@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using Pug.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
