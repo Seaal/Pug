@@ -54,10 +54,9 @@ namespace Pug.Client
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                name: "default",
-                template: "{*.}",
-                defaults: new { controller = "Home", action = "Index" }
+                routes.MapSpaFallbackRoute(
+                    name: "default",
+                    defaults: new { controller = "Home", action = "Index" }
                 );
             });
         }
