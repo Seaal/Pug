@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pug.Api.ModelMappers\Pug.Api.ModelMappers.csproj" />
     <ProjectReference Include="..\Pug.Api.ViewModels\Pug.Api.ViewModels.csproj" />
     <ProjectReference Include="..\Pug.Data\Pug.Data.csproj" />
   </ItemGroup>

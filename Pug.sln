@@ -17,9 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Api.Logic", "Pug.Api.Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pug.Api.ViewModels", "Pug.Api.ViewModels\Pug.Api.ViewModels.csproj", "{DDFEE3D2-2651-47AD-999F-026D04186A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seaal.DependencyInjection", "Seaal.DependencyInjection\Seaal.DependencyInjection.csproj", "{B1440F90-9357-40DE-A3D7-59B0313F5882}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seaal.DependencyInjection", "Seaal.DependencyInjection\Seaal.DependencyInjection.csproj", "{B1440F90-9357-40DE-A3D7-59B0313F5882}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seaal.DependencyInjection.SimpleInjector", "Seaal.DependencyInjection.SimpleInjector\Seaal.DependencyInjection.SimpleInjector.csproj", "{E1C4DFF8-63C5-4DBD-B0B7-5E4A919E7D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seaal.DependencyInjection.SimpleInjector", "Seaal.DependencyInjection.SimpleInjector\Seaal.DependencyInjection.SimpleInjector.csproj", "{E1C4DFF8-63C5-4DBD-B0B7-5E4A919E7D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Domain", "Pug.Domain\Pug.Domain.csproj", "{40B2F60D-0E2F-41CE-AB5F-77689DC109D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pug.Api.ModelMappers", "Pug.Api.ModelMappers\Pug.Api.ModelMappers.csproj", "{147424A2-0237-4C0E-91DD-9C094CA04D16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,14 @@ Global
 		{E1C4DFF8-63C5-4DBD-B0B7-5E4A919E7D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1C4DFF8-63C5-4DBD-B0B7-5E4A919E7D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1C4DFF8-63C5-4DBD-B0B7-5E4A919E7D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B2F60D-0E2F-41CE-AB5F-77689DC109D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B2F60D-0E2F-41CE-AB5F-77689DC109D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B2F60D-0E2F-41CE-AB5F-77689DC109D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B2F60D-0E2F-41CE-AB5F-77689DC109D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{147424A2-0237-4C0E-91DD-9C094CA04D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{147424A2-0237-4C0E-91DD-9C094CA04D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{147424A2-0237-4C0E-91DD-9C094CA04D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{147424A2-0237-4C0E-91DD-9C094CA04D16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

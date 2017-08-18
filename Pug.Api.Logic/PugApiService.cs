@@ -6,54 +6,36 @@ using System.Linq;
 using Pug.Api.ViewModels.Pugs.Phases;
 using System;
 using Pug.Domain;
+using Pug.Api.ModelMappers.Pugs;
 
 namespace Pug.Api.Logic
 {
     public class PugApiService : IPugApiService
     {
         private readonly IPickUpGameRepository _pugRepository;
+        private readonly IPickUpGameModelMapper _pugModelMapper;
 
-        public PugApiService(IPickUpGameRepository pugRepository)
+        public PugApiService(IPickUpGameRepository pugRepository, IPickUpGameModelMapper pugModelMapper)
         {
             _pugRepository = pugRepository;
+            _pugModelMapper = pugModelMapper;
         }
 
         public async Task<PickUpGameViewModel> GetPugAsync(string id)
         {
             PickUpGame pug = await _pugRepository.Get(id);
 
-            return new PickUpGameViewModel()
+            PickUpGameViewModel pugViewModel = _pugModelMapper.ToViewModel(pug);
+
+            pugViewModel.PickablePlayers = new[]
             {
-                Id = pug.Id.ToString(),
-                Path = pug.Path,
-                PickablePlayers = new[]
-                {
-                    new PlayerViewModel() { Id = "3", Name = "Onasi" },
-                    new PlayerViewModel() { Id = "4", Name = "Alpha" },
-                    new PlayerViewModel() { Id = "5", Name = "Dave" },
-                    new PlayerViewModel() { Id = "6", Name = "Max" },
-                },
-                Teams = pug.Teams.Select(t => new TeamViewModel()
-                {
-                    Name = t.Name,
-                    Captain = t.Players.Where(p => p.Type == TeamPlayerType.Captain).Select(p => new PlayerViewModel()
-                    {
-                        Id = p.Id,
-                        Name = p.Name
-                    }).FirstOrDefault(),
-                    Players = t.Players.Select(p => new PlayerViewModel()
-                    {
-                        Id = p.Id,
-                        Name = p.Name
-                    })
-                }),
-                CurrentPhase = new PickPlayerPugPhaseViewModel()
-                {
-                    Expiry = DateTime.UtcNow.AddSeconds(30),
-                    Type = 1,
-                    TeamIndex = 0
-                }
+                new PlayerViewModel() { Id = "3", Name = "Onasi" },
+                new PlayerViewModel() { Id = "4", Name = "Alpha" },
+                new PlayerViewModel() { Id = "5", Name = "Dave" },
+                new PlayerViewModel() { Id = "6", Name = "Max" },
             };
+
+            return pugViewModel;
         }
     }
 }

@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pug.Domain\Pug.Domain.csproj" />
     <ProjectReference Include="..\Seaal.Data.MongoDB\Seaal.Data.MongoDB.csproj" />
   </ItemGroup>
 
