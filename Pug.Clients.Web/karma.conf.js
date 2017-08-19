@@ -39,6 +39,7 @@ module.exports = function (config) {
         { pattern: "node_modules/rxjs/**/*.js.map", included: false, watched: false },
         { pattern: "node_modules/@ngx-translate/core/bundles/*.umd.js", included: false, watched: false },
         { pattern: "node_modules/tslib/tslib.js", included: false, watched: false },
+        { pattern: "node_modules/moment/min/moment-with-locales.js", included: false, watched: false},
 
         // Paths loaded via module imports:
         // Angular itself
