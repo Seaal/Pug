@@ -1,6 +1,7 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/68faoc7f98fm0gpe/branch/master?svg=true)](https://ci.appveyor.com/project/Seaal/pug/branch/master)
-
 # Pug
+
+[![Build status](https://ci.appveyor.com/api/projects/status/68faoc7f98fm0gpe/branch/master?svg=true)](https://ci.appveyor.com/project/Seaal/pug/branch/master) [![Build Status](https://travis-ci.org/Seaal/Pug.svg?branch=master)](https://travis-ci.org/Seaal/Pug)
+
 A Client for Jedi Knight Academy pick up games, currently in pre-alpha prototyping phase.
 
 ## Getting Started
