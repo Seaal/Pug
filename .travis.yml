@@ -2,7 +2,7 @@ language: csharp
 mono: none
 dotnet: 1.0.1
 dist: trusty
-build:
+script:
   - dotnet restore
   - dotnet build
   - dotnet test Pug.Api.Logic.Tests
