@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/68faoc7f98fm0gpe/branch/master?svg=true)](https://ci.appveyor.com/project/Seaal/pug/branch/master)
+
 # Pug
 A Client for Jedi Knight Academy pick up games, currently in pre-alpha prototyping phase.
 
@@ -9,6 +11,7 @@ To get started on developing the Pug project, you need to have the following ins
 * Node
 * npm (Version 3+)
 * Gulp (globally) - `npm install -g gulp`
+* MongoDB (Version 3.4)
 
 ## Running
 
