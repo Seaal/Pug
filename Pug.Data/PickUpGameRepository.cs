@@ -15,7 +15,7 @@ namespace Pug.Data
             _documentCollection = connection.GetCollection<PickUpGame, ObjectId>(_collectionName);
         }
 
-        public Task<PickUpGame> Get(string id)
+        public Task<PickUpGame> GetAsync(string id)
         {
             return _documentCollection.GetDocumentByIdAsync(new ObjectId(id));
         }

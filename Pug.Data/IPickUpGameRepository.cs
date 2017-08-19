@@ -9,6 +9,6 @@ namespace Pug.Data
 {
     public interface IPickUpGameRepository
     {
-        Task<PickUpGame> Get(string id);
+        Task<PickUpGame> GetAsync(string id);
     }
 }

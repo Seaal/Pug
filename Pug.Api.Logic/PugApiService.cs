@@ -2,10 +2,6 @@
 using Pug.Data;
 using Pug.Data.Models.Pugs;
 using Pug.Api.ViewModels.Pugs;
-using System.Linq;
-using Pug.Api.ViewModels.Pugs.Phases;
-using System;
-using Pug.Domain;
 using Pug.Api.ModelMappers.Pugs;
 
 namespace Pug.Api.Logic
@@ -23,7 +19,7 @@ namespace Pug.Api.Logic
 
         public async Task<PickUpGameViewModel> GetPugAsync(string id)
         {
-            PickUpGame pug = await _pugRepository.Get(id);
+            PickUpGame pug = await _pugRepository.GetAsync(id);
 
             PickUpGameViewModel pugViewModel = _pugModelMapper.ToViewModel(pug);
 
