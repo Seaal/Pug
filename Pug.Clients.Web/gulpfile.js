@@ -56,12 +56,7 @@ gulp.task("typescript", ["clean-typescript", "lint-typescript"], function () {
 
     log("Compiling typescript and adding them to the output");
 
-    var tsSource = [
-        config.app.typescript,
-        config.typings
-    ];
-
-    return gulp.src(tsSource)
+    return gulp.src(config.app.typescript)
         .pipe($.sourcemaps.init())
         .pipe(tsProject())
         .js

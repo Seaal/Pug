@@ -62,9 +62,6 @@
             html: "**/*.html"
         },
 
-        typings: "typings/index.d.ts",
-        typingsConfig: "typings.json",
-
         karmaConfig: "karma.conf.js",
 
         config: [
