@@ -2,12 +2,14 @@ language: csharp
 mono: none
 dotnet: 1.0.1
 dist: trusty
-script:
+before_script:
   - dotnet restore
+  - npm install
+  - npm install -g gulp-cli
+script:
+
   - dotnet build
   - dotnet test Pug.Api.Logic.Tests
   - cd Pug.Clients.Web
-  - npm install
-  - npm install -g Gulp
   - gulp build-dev
   - cd ../
