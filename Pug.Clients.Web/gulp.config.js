@@ -29,7 +29,8 @@
                 packages + "rxjs/**/*{.js,.js.map}",
                 packages + "tslib/tslib.js",
                 "!" + packages + "rxjs/bundles/*",
-                packages + "@ngx-translate/**/bundles/*"
+                packages + "@ngx-translate/**/bundles/*",
+                packages + "moment/min/moment-with-locales.js"
             ],
             //Statically loaded in Index.cshtml
             src: [
@@ -38,11 +39,9 @@
                 packages + "systemjs/dist/system.src.js",
                 packages + "jquery/dist/jquery.js",
                 packages + "signalr/jquery.signalR.js",
-                packages + "moment/min/moment-with-locales.js",
 
                 packages + "bootstrap/dist/css/bootstrap.css",
                 packages + "font-awesome/css/font-awesome.css"
-
             ]
 
         },

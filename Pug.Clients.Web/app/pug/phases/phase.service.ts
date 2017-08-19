@@ -7,6 +7,8 @@ import { PugPhase } from "./pug-phase";
 import { PugPhaseStrategyFactory } from "./pug-phase-strategy.factory";
 import { IPhaseStrategy } from "./iphase-strategy";
 
+import * as moment from "moment";
+
 @Injectable()
 export class PhaseService {
 
