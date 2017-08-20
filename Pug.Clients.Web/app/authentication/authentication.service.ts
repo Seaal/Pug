@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 
+import * as auth0 from "auth0-js";
+
 @Injectable()
 export class AuthenticationService {
 
