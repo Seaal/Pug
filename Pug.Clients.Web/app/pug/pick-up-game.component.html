@@ -1,0 +1,13 @@
+﻿<div class="titleArea">
+    <h1>PUG #{{pug.id}}</h1>
+    <p>({{ pug.path.join(" > ") }})</p>
+</div>
+<div class="teamArea">
+    <pug-team [team]="pug.teams[0]"></pug-team>
+    <div class="action">
+        <pug-phase-container [pug]="pug"></pug-phase-container>
+    </div>
+    <pug-team [team]="pug.teams[1]"></pug-team>
+</div>
+<div class="clearfix"></div>
+<div class="playerArea"></div>

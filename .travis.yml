@@ -1,0 +1,15 @@
+language: csharp
+mono: none
+dotnet: 1.0.1
+dist: trusty
+before_script:
+  - dotnet restore
+  - cd Pug.Clients.Web
+  - npm install
+  - npm install -g gulp-cli
+  - cd ../
+script:
+
+  - cd Pug.Clients.Web
+  - gulp build-dev
+  - cd ../

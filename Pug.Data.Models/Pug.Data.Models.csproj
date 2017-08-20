@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pug.Domain\Pug.Domain.csproj" />
+    <ProjectReference Include="..\Seaal.Data.MongoDB\Seaal.Data.MongoDB.csproj" />
+  </ItemGroup>
+
+</Project>
