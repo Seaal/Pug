@@ -34,7 +34,7 @@ namespace Pug.Api.Logic.Tests
 
             public GetPugAsyncTests()
             {
-                _pugRepository.GetAsync(pugId).Returns((ci) => Task.FromResult(_pug));
+                _pugRepository.GetAsync(pugId).Returns((ci) => _pug);
 
                 _pugModelMapper.ToViewModel(Arg.Is<PickUpGame>((pug) => pug == _pug)).Returns((ci) => _pugViewModel);
 
