@@ -20,9 +20,9 @@ export class AuthenticationService {
             clientID: '9-1XEF_anI8ih2_UJUrP1edekKGhKSEB',
             domain: 'seaal-dev.auth0.com',
             responseType: 'token id_token',
-            audience: 'https://seaal-dev.auth0.com/userinfo',
+            audience: 'https://pug.gg/api/',
             redirectUri: 'http://localhost:3000/auth/callback',
-            scope: 'openid profile'
+            scope: 'openid profile test:scope'
         });
     }
 
@@ -79,6 +79,10 @@ export class AuthenticationService {
         });
 
         return profileSubject.asObservable();
+    }
+
+    public getAccessToken(): string {
+        return localStorage.getItem(AuthenticationService.accessTokenKey);
     }
 
     private setSession(authResult: auth0.Auth0DecodedHash): void {

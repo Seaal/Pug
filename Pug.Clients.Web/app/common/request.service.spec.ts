@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from "@angular/common/
 
 import { RequestService } from "./request.service";
 import { AppConfig, APP_CONFIG } from "../app-config";
+import { AuthenticationService } from "../authentication/authentication.service";
 
 describe("RequestService", () => {
 
@@ -11,10 +12,13 @@ describe("RequestService", () => {
             apiEndpoint: "/api/"
         };
 
+        const authenticationServiceSpy: jasmine.SpyObj<AuthenticationService> = jasmine.createSpyObj<AuthenticationService>("authenticationService", ["getAccessToken"]);
+
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
             providers: [
                 RequestService,
+                { provide: AuthenticationService, useValue: authenticationServiceSpy },
                 { provide: APP_CONFIG, useValue: appConfig }
             ]
         });
