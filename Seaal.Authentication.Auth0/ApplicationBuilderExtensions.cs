@@ -9,7 +9,7 @@ namespace Seaal.Authentication.Auth0
         {
             JwtBearerOptions jwtOptions = new JwtBearerOptions()
             {
-                Audience = config.Identifier,
+                Audience = config.ApiIdentifier,
                 Authority = $"https://{config.Domain}/"
             };
 

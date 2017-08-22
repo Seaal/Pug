@@ -9,6 +9,6 @@ namespace Seaal.Authentication.Auth0
     public class Auth0Config
     {
         public string Domain { get; set; }
-        public string Identifier { get; set; }
+        public string ApiIdentifier { get; set; }
     }
 }
