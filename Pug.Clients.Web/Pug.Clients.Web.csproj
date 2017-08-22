@@ -12,6 +12,7 @@
 
   <PropertyGroup>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <UserSecretsId>3f38c8dc-f2b9-4eed-9583-bf5210708eec</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
@@ -47,6 +49,10 @@
     <PackageReference Include="Owin" Version="1.0.0" />
     <PackageReference Include="SimpleInjector" Version="4.0.8" />
     <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

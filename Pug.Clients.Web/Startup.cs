@@ -15,10 +15,16 @@ namespace Pug.Client
 
         public Startup(IHostingEnvironment env)
         {
-            Configuration = new ConfigurationBuilder()
+            IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            
+            if(env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         private Container container = new Container();
