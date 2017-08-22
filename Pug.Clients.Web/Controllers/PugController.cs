@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pug.Api.Logic;
 using Pug.Api.ViewModels.Pugs;
 using System.Threading.Tasks;
 
 namespace Pug.Client.Controllers
 {
+    [Authorize]
     [Route("api/pug")]
     public class PugController : Controller
     {

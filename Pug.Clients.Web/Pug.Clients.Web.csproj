@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Pug.Api.Logic\Pug.Api.Logic.csproj" />
     <ProjectReference Include="..\Pug.Api.ViewModels\Pug.Api.ViewModels.csproj" />
     <ProjectReference Include="..\Pug.ServerManager\Pug.ServerManager.csproj" />
+    <ProjectReference Include="..\Seaal.Authentication.Auth0\Seaal.Authentication.Auth0.csproj" />
     <ProjectReference Include="..\Seaal.DependencyInjection.SimpleInjector\Seaal.DependencyInjection.SimpleInjector.csproj" />
     <ProjectReference Include="..\Seaal.DependencyInjection\Seaal.DependencyInjection.csproj" />
   </ItemGroup>
