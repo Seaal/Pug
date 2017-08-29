@@ -1,7 +1,9 @@
 ﻿import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
+import { Subscription } from "rxjs/Subscription";
 
 import * as auth0 from "auth0-js";
 
@@ -14,6 +16,7 @@ export class AuthenticationService {
 
     private auth0: auth0.WebAuth;
     private userProfile: any;
+    private refreshSubscription: Subscription;
 
     constructor(private router: Router) {
         this.auth0 = new auth0.WebAuth({
@@ -34,6 +37,8 @@ export class AuthenticationService {
         localStorage.removeItem(AuthenticationService.accessTokenKey);
         localStorage.removeItem(AuthenticationService.idTokenKey);
         localStorage.removeItem(AuthenticationService.expiresAtKey);
+
+        this.unscheduleRenewal();
     }
 
     public handleAuthentication(): void {
@@ -81,6 +86,52 @@ export class AuthenticationService {
         return profileSubject.asObservable();
     }
 
+    public renewToken(): void {
+        this.auth0.renewAuth({
+            audience: 'https://pug.gg/api/',
+            redirectUri: 'http://localhost:3000/auth/renewtoken',
+            usePostMessage: true
+        }, (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                this.setSession(result);
+            }
+        });
+    }
+
+    public scheduleRenewal(): void {
+        if (!this.isAuthenticated()) {
+            return;
+        }
+
+        this.unscheduleRenewal();
+
+        const expiresAt: number = JSON.parse(localStorage.getItem(AuthenticationService.expiresAtKey));
+
+        const source = Observable.of(expiresAt).flatMap(
+            expires => {
+                const now = Date.now();
+
+                return Observable.timer(Math.max(1, expires - now));
+            }
+        );
+
+        this.refreshSubscription = source
+            .subscribe(() => {
+                this.renewToken();
+                this.scheduleRenewal();
+            });
+    }
+
+    public unscheduleRenewal(): void {
+        if (!this.refreshSubscription) {
+            return;
+        }
+
+        this.refreshSubscription.unsubscribe();
+    }
+
     public getAccessToken(): string {
         return localStorage.getItem(AuthenticationService.accessTokenKey);
     }
@@ -91,5 +142,7 @@ export class AuthenticationService {
         localStorage.setItem(AuthenticationService.accessTokenKey, authResult.accessToken);
         localStorage.setItem(AuthenticationService.idTokenKey, authResult.idToken);
         localStorage.setItem(AuthenticationService.expiresAtKey, expiresAt);
+
+        this.scheduleRenewal();
     }
 }

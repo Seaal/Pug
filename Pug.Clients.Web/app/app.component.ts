@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
         this.authenticationService.getProfile().subscribe(profile => {
             this.nickname = profile.nickname;
         });
+
+        this.authenticationService.scheduleRenewal();
     }
 
     public isAuthenticated(): boolean {
