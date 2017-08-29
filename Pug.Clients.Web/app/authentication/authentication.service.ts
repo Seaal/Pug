@@ -4,8 +4,9 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import { Subscription } from "rxjs/Subscription";
-
 import * as auth0 from "auth0-js";
+
+import { PersistentStorageService } from "../common/persistent-storage.service";
 
 @Injectable()
 export class AuthenticationService {
@@ -18,7 +19,8 @@ export class AuthenticationService {
     private userProfile: any;
     private refreshSubscription: Subscription;
 
-    constructor(private router: Router) {
+    constructor(private router: Router,
+                private storageService: PersistentStorageService) {
         this.auth0 = new auth0.WebAuth({
             clientID: '9-1XEF_anI8ih2_UJUrP1edekKGhKSEB',
             domain: 'seaal-dev.auth0.com',
@@ -34,9 +36,9 @@ export class AuthenticationService {
     }
 
     public logout(): void {
-        localStorage.removeItem(AuthenticationService.accessTokenKey);
-        localStorage.removeItem(AuthenticationService.idTokenKey);
-        localStorage.removeItem(AuthenticationService.expiresAtKey);
+        this.storageService.remove(AuthenticationService.accessTokenKey);
+        this.storageService.remove(AuthenticationService.idTokenKey);
+        this.storageService.remove(AuthenticationService.expiresAtKey);
 
         this.unscheduleRenewal();
     }
@@ -55,13 +57,13 @@ export class AuthenticationService {
     }
 
     public isAuthenticated(): boolean {
-        const expiresAt = JSON.parse(localStorage.getItem(AuthenticationService.expiresAtKey));
+        const expiresAt = this.storageService.get<number>(AuthenticationService.expiresAtKey);
 
         return new Date().getTime() < expiresAt;
     }
 
     public getProfile(): Observable<any> {
-        const accessToken = localStorage.getItem(AuthenticationService.accessTokenKey);
+        const accessToken = this.storageService.get<string>(AuthenticationService.accessTokenKey);
 
         if (!this.isAuthenticated()) {
             return Observable.empty();
@@ -107,7 +109,7 @@ export class AuthenticationService {
 
         this.unscheduleRenewal();
 
-        const expiresAt: number = JSON.parse(localStorage.getItem(AuthenticationService.expiresAtKey));
+        const expiresAt: number = this.storageService.get<number>(AuthenticationService.expiresAtKey);
 
         const source = Observable.of(expiresAt).flatMap(
             expires => {
@@ -133,15 +135,15 @@ export class AuthenticationService {
     }
 
     public getAccessToken(): string {
-        return localStorage.getItem(AuthenticationService.accessTokenKey);
+        return this.storageService.get<string>(AuthenticationService.accessTokenKey);
     }
 
     private setSession(authResult: auth0.Auth0DecodedHash): void {
         const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
 
-        localStorage.setItem(AuthenticationService.accessTokenKey, authResult.accessToken);
-        localStorage.setItem(AuthenticationService.idTokenKey, authResult.idToken);
-        localStorage.setItem(AuthenticationService.expiresAtKey, expiresAt);
+        this.storageService.set(AuthenticationService.accessTokenKey, authResult.accessToken);
+        this.storageService.set(AuthenticationService.idTokenKey, authResult.idToken);
+        this.storageService.set(AuthenticationService.expiresAtKey, expiresAt);
 
         this.scheduleRenewal();
     }
