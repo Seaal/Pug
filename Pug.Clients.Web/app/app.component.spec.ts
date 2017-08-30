@@ -15,7 +15,7 @@ describe("AppComponent", () => {
 
     beforeEach(async(() => {
         const localizationServiceSpy = jasmine.createSpyObj("localizationService", ["setLanguage"]);
-        const authenticationServiceSpy = jasmine.createSpyObj("authenticationService", ["getProfile", "isAuthenticated", "scheduleRenewal"]);
+        const authenticationServiceSpy = jasmine.createSpyObj("authenticationService", ["getProfile", "isAuthenticated", "scheduleRenewal", "initAuthentication"]);
 
         authenticationServiceSpy.getProfile.and.returnValue(Observable.of(""));
 

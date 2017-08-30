@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.authenticationService.initAuthentication();
+
         this.authenticationService.getProfile().subscribe(profile => {
             this.nickname = profile.nickname;
         });

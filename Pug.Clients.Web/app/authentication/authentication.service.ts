@@ -7,6 +7,7 @@ import { Subscription } from "rxjs/Subscription";
 import * as auth0 from "auth0-js";
 
 import { PersistentStorageService } from "../common/persistent-storage.service";
+import { AuthenticationInfo } from "./authentication-info";
 
 @Injectable()
 export class AuthenticationService {
@@ -18,6 +19,7 @@ export class AuthenticationService {
     private auth0: auth0.WebAuth;
     private userProfile: any;
     private refreshSubscription: Subscription;
+    private authInfo: AuthenticationInfo;
 
     constructor(private router: Router,
                 private storageService: PersistentStorageService) {
@@ -29,6 +31,24 @@ export class AuthenticationService {
             redirectUri: 'http://localhost:3000/auth/callback',
             scope: 'openid profile test:scope'
         });
+    }
+
+    public initAuthentication(): void {
+        const expiresAt = this.storageService.get<number>(AuthenticationService.expiresAtKey);
+
+        if (expiresAt === null) {
+            return;
+        }
+
+        if (new Date().getTime() >= expiresAt) {
+            this.renewToken();
+        } else {
+            this.authInfo = {
+                accessToken: this.storageService.get<string>(AuthenticationService.accessTokenKey),
+                idToken: this.storageService.get<string>(AuthenticationService.idTokenKey),
+                expiresAt
+            };
+        }
     }
 
     public login(): void {
@@ -57,13 +77,11 @@ export class AuthenticationService {
     }
 
     public isAuthenticated(): boolean {
-        const expiresAt = this.storageService.get<number>(AuthenticationService.expiresAtKey);
-
-        return new Date().getTime() < expiresAt;
+        return new Date().getTime() < this.authInfo.expiresAt;
     }
 
     public getProfile(): Observable<any> {
-        const accessToken = this.storageService.get<string>(AuthenticationService.accessTokenKey);
+        const accessToken = this.authInfo.accessToken;
 
         if (!this.isAuthenticated()) {
             return Observable.empty();
@@ -109,9 +127,7 @@ export class AuthenticationService {
 
         this.unscheduleRenewal();
 
-        const expiresAt: number = this.storageService.get<number>(AuthenticationService.expiresAtKey);
-
-        const source = Observable.of(expiresAt).flatMap(
+        const source = Observable.of(this.authInfo.expiresAt).flatMap(
             expires => {
                 const now = Date.now();
 
@@ -132,19 +148,33 @@ export class AuthenticationService {
         }
 
         this.refreshSubscription.unsubscribe();
+        this.refreshSubscription = null;
     }
 
     public getAccessToken(): string {
-        return this.storageService.get<string>(AuthenticationService.accessTokenKey);
+        return this.authInfo.accessToken;
     }
 
     private setSession(authResult: auth0.Auth0DecodedHash): void {
-        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+
+        this.authInfo = {
+            accessToken: authResult.accessToken,
+            idToken: authResult.idToken,
+            expiresAt: null
+        };
 
         this.storageService.set(AuthenticationService.accessTokenKey, authResult.accessToken);
         this.storageService.set(AuthenticationService.idTokenKey, authResult.idToken);
-        this.storageService.set(AuthenticationService.expiresAtKey, expiresAt);
+
+        this.updateExpiry(authResult.expiresIn);
 
         this.scheduleRenewal();
+    }
+
+    private updateExpiry(expiresIn: number) {
+        const expiresAt = (expiresIn * 1000) + new Date().getTime();
+
+        this.storageService.set(AuthenticationService.expiresAtKey, expiresAt);
+        this.authInfo.expiresAt = expiresAt;
     }
 }
