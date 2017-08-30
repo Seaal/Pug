@@ -15,7 +15,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { AuthenticationConfig, AUTHENTICATION_CONFIG } from "./authentication/authentication-config";
 
 export function createTranslateLoader(http: Http) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 const appConfig: AppConfig = {
@@ -23,13 +23,14 @@ const appConfig: AppConfig = {
 };
 
 const authConfig: AuthenticationConfig = {
-    clientId: '9-1XEF_anI8ih2_UJUrP1edekKGhKSEB',
-    domain: 'seaal-dev.auth0.com',
-    responseType: 'token id_token',
+    clientId: "9-1XEF_anI8ih2_UJUrP1edekKGhKSEB",
+    domain: "seaal-dev.auth0.com",
+    responseType: "token id_token",
     audience: 'https://pug.gg/api/',
     redirectUri: 'http://localhost:3000/auth/callback',
     renewTokenUri: 'http://localhost:3000/auth/renewtoken',
-    scope: 'openid profile test:scope'
+    scope: "openid profile test:scope",
+    defaultLoginRedirectUrl: ""
 };
 
 @NgModule({

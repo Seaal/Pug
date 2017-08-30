@@ -16,6 +16,7 @@ export class AuthenticationService {
     private static accessTokenKey: string = "auth_access_token";
     private static idTokenKey: string = "auth_id_token";
     private static expiresAtKey: string = "auth_expires_at";
+    private static redirectUrlKey: string = "auth_redirect_url";
 
     private auth0: auth0.WebAuth;
 
@@ -56,10 +57,16 @@ export class AuthenticationService {
     }
 
     public login(): void {
+        const currentUrl: string = this.router.url;
+
+        this.storageService.set(AuthenticationService.redirectUrlKey, currentUrl);
+
         this.auth0.authorize(undefined);
     }
 
     public logout(): void {
+        this.authInfo = null;
+
         this.storageService.remove(AuthenticationService.accessTokenKey);
         this.storageService.remove(AuthenticationService.idTokenKey);
         this.storageService.remove(AuthenticationService.expiresAtKey);
@@ -72,7 +79,17 @@ export class AuthenticationService {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = "";
                 this.setSession(authResult);
-                this.router.navigate(["pug"]);
+
+                const redirectUrl: string = this.storageService.get<string>(AuthenticationService.redirectUrlKey);
+
+                this.storageService.remove(AuthenticationService.redirectUrlKey);
+
+                if (redirectUrl) {
+                    this.router.navigateByUrl(redirectUrl);
+                } else {
+                    this.router.navigateByUrl(this.authConfig.defaultLoginRedirectUrl);
+                }
+
             } else if (err) {
                 this.router.navigate(["pug"]);
                 console.log(err);
