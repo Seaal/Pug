@@ -1,4 +1,4 @@
-﻿import { Injectable } from "@angular/core";
+﻿import { Injectable, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Observable } from "rxjs/Observable";
@@ -8,6 +8,7 @@ import * as auth0 from "auth0-js";
 
 import { PersistentStorageService } from "../common/persistent-storage.service";
 import { AuthenticationInfo } from "./authentication-info";
+import { AuthenticationConfig, AUTHENTICATION_CONFIG } from "./authentication-config";
 
 @Injectable()
 export class AuthenticationService {
@@ -17,19 +18,22 @@ export class AuthenticationService {
     private static expiresAtKey: string = "auth_expires_at";
 
     private auth0: auth0.WebAuth;
+
     private userProfile: any;
+
     private refreshSubscription: Subscription;
     private authInfo: AuthenticationInfo;
 
     constructor(private router: Router,
-                private storageService: PersistentStorageService) {
+                private storageService: PersistentStorageService,
+                @Inject(AUTHENTICATION_CONFIG) private authConfig: AuthenticationConfig) {
         this.auth0 = new auth0.WebAuth({
-            clientID: '9-1XEF_anI8ih2_UJUrP1edekKGhKSEB',
-            domain: 'seaal-dev.auth0.com',
-            responseType: 'token id_token',
-            audience: 'https://pug.gg/api/',
-            redirectUri: 'http://localhost:3000/auth/callback',
-            scope: 'openid profile test:scope'
+            clientID: authConfig.clientId,
+            domain: authConfig.domain,
+            responseType: authConfig.responseType,
+            audience: authConfig.audience,
+            redirectUri: authConfig.redirectUri,
+            scope: authConfig.scope
         });
     }
 
@@ -108,8 +112,8 @@ export class AuthenticationService {
 
     public renewToken(): void {
         this.auth0.renewAuth({
-            audience: 'https://pug.gg/api/',
-            redirectUri: 'http://localhost:3000/auth/renewtoken',
+            audience: this.authConfig.audience,
+            redirectUri: this.authConfig.renewTokenUri,
             usePostMessage: true
         }, (err, result) => {
             if (err) {
