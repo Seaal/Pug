@@ -2,7 +2,7 @@
 import { RouterTestingModule } from "@angular/router/testing";
 
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/of";
+import "rxjs/add/observable/empty";
 
 import { AppComponent } from "./app.component";
 import { LocalizationService } from "./common/localization.service";
@@ -15,9 +15,9 @@ describe("AppComponent", () => {
 
     beforeEach(async(() => {
         const localizationServiceSpy = jasmine.createSpyObj("localizationService", ["setLanguage"]);
-        const authenticationServiceSpy = jasmine.createSpyObj("authenticationService", ["getProfile", "isAuthenticated", "scheduleRenewal", "initAuthentication"]);
+        const authenticationServiceSpy = jasmine.createSpyObj<AuthenticationService>("authenticationService", ["isAuthenticated", "initAuthentication", "profile"]);
 
-        authenticationServiceSpy.getProfile.and.returnValue(Observable.of(""));
+        authenticationServiceSpy.profile.and.returnValue(Observable.empty());
 
         TestBed.configureTestingModule({
             declarations: [AppComponent],

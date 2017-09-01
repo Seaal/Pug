@@ -8,7 +8,9 @@ import * as auth0 from "auth0-js";
 
 import { PersistentStorageService } from "../common/persistent-storage.service";
 import { AuthenticationInfo } from "./authentication-info";
-import { AuthenticationConfig, AUTHENTICATION_CONFIG } from "./authentication-config";
+import { IAuthenticationProvider, AUTHENTICATION_PROVIDER } from "./iauthentication.provider";
+import { User } from "./user";
+import { ReplaySubject } from "rxjs/ReplaySubject";
 
 @Injectable()
 export class AuthenticationService {
@@ -18,24 +20,25 @@ export class AuthenticationService {
     private static expiresAtKey: string = "auth_expires_at";
     private static redirectUrlKey: string = "auth_redirect_url";
 
-    private auth0: auth0.WebAuth;
+    private static emptyAuthInfo: AuthenticationInfo = {
+        accessToken: undefined,
+        idToken: undefined,
+        expiresAt: undefined
+    };
 
-    private userProfile: any;
+    public defaultLoginRedirectUrl: string;
+
+    private profileSubject: ReplaySubject<User>;
 
     private refreshSubscription: Subscription;
     private authInfo: AuthenticationInfo;
 
     constructor(private router: Router,
                 private storageService: PersistentStorageService,
-                @Inject(AUTHENTICATION_CONFIG) private authConfig: AuthenticationConfig) {
-        this.auth0 = new auth0.WebAuth({
-            clientID: authConfig.clientId,
-            domain: authConfig.domain,
-            responseType: authConfig.responseType,
-            audience: authConfig.audience,
-            redirectUri: authConfig.redirectUri,
-            scope: authConfig.scope
-        });
+                @Inject(AUTHENTICATION_PROVIDER) private authenticationProvider: IAuthenticationProvider) {
+        this.profileSubject = new ReplaySubject<User>(1);
+
+        this.authInfo = AuthenticationService.emptyAuthInfo;
     }
 
     public initAuthentication(): void {
@@ -53,6 +56,9 @@ export class AuthenticationService {
                 idToken: this.storageService.get<string>(AuthenticationService.idTokenKey),
                 expiresAt
             };
+
+            this.scheduleRenewal();
+            this.setProfile();
         }
     }
 
@@ -61,23 +67,24 @@ export class AuthenticationService {
 
         this.storageService.set(AuthenticationService.redirectUrlKey, currentUrl);
 
-        this.auth0.authorize(undefined);
+        this.authenticationProvider.displayLogin();
     }
 
     public logout(): void {
-        this.authInfo = null;
+        this.unscheduleRenewal();
+
+        this.authInfo = AuthenticationService.emptyAuthInfo;
 
         this.storageService.remove(AuthenticationService.accessTokenKey);
         this.storageService.remove(AuthenticationService.idTokenKey);
         this.storageService.remove(AuthenticationService.expiresAtKey);
 
-        this.unscheduleRenewal();
+        this.profileSubject.next(null);
     }
 
     public handleAuthentication(): void {
-        this.auth0.parseHash((err, authResult) => {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                window.location.hash = "";
+        this.authenticationProvider.handleAuthentication().subscribe(
+            authResult => {
                 this.setSession(authResult);
 
                 const redirectUrl: string = this.storageService.get<string>(AuthenticationService.redirectUrlKey);
@@ -85,63 +92,39 @@ export class AuthenticationService {
                 this.storageService.remove(AuthenticationService.redirectUrlKey);
 
                 if (redirectUrl) {
-                    this.router.navigateByUrl(redirectUrl);
+                    this.router.navigateByUrl(redirectUrl).then(success => console.log(success));
                 } else {
-                    this.router.navigateByUrl(this.authConfig.defaultLoginRedirectUrl);
+                    this.router.navigateByUrl(this.defaultLoginRedirectUrl || "");
                 }
-
-            } else if (err) {
-                this.router.navigate(["pug"]);
-                console.log(err);
+            },
+            error => {
+                this.router.navigateByUrl(this.defaultLoginRedirectUrl || "");
             }
-        });
+        );
     }
 
     public isAuthenticated(): boolean {
-        return new Date().getTime() < this.authInfo.expiresAt;
+        return this.authInfo.expiresAt && new Date().getTime() < this.authInfo.expiresAt;
     }
 
-    public getProfile(): Observable<any> {
-        const accessToken = this.authInfo.accessToken;
+    public getAccessToken(): string {
+        return this.authInfo.accessToken;
+    }
 
-        if (!this.isAuthenticated()) {
-            return Observable.empty();
+    public profile(): Observable<User> {
+        return this.profileSubject.asObservable();
+    }
+
+    private unscheduleRenewal(): void {
+        if (!this.refreshSubscription) {
+            return;
         }
 
-        const profileSubject = new Subject<any>();
-
-        this.auth0.client.userInfo(accessToken, (err, profile) => {
-            if (profile) {
-                this.userProfile = profile;
-                profileSubject.next(profile);
-                profileSubject.complete();
-                console.log(profile);
-            }
-
-            if (err) {
-                profileSubject.error(err);
-                profileSubject.complete();
-            }
-        });
-
-        return profileSubject.asObservable();
+        this.refreshSubscription.unsubscribe();
+        this.refreshSubscription = null;
     }
 
-    public renewToken(): void {
-        this.auth0.renewAuth({
-            audience: this.authConfig.audience,
-            redirectUri: this.authConfig.renewTokenUri,
-            usePostMessage: true
-        }, (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                this.setSession(result);
-            }
-        });
-    }
-
-    public scheduleRenewal(): void {
+    private scheduleRenewal(): void {
         if (!this.isAuthenticated()) {
             return;
         }
@@ -163,39 +146,40 @@ export class AuthenticationService {
             });
     }
 
-    public unscheduleRenewal(): void {
-        if (!this.refreshSubscription) {
-            return;
-        }
-
-        this.refreshSubscription.unsubscribe();
-        this.refreshSubscription = null;
-    }
-
-    public getAccessToken(): string {
-        return this.authInfo.accessToken;
+    private renewToken(): void {
+        this.authenticationProvider.renewToken().subscribe(
+            authResult => this.setSession(authResult),
+            error => console.log(error)
+        );
     }
 
     private setSession(authResult: auth0.Auth0DecodedHash): void {
 
+        const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
+
         this.authInfo = {
             accessToken: authResult.accessToken,
             idToken: authResult.idToken,
-            expiresAt: null
+            expiresAt
         };
 
         this.storageService.set(AuthenticationService.accessTokenKey, authResult.accessToken);
         this.storageService.set(AuthenticationService.idTokenKey, authResult.idToken);
-
-        this.updateExpiry(authResult.expiresIn);
+        this.storageService.set(AuthenticationService.expiresAtKey, expiresAt);
 
         this.scheduleRenewal();
+        this.setProfile();
     }
 
-    private updateExpiry(expiresIn: number) {
-        const expiresAt = (expiresIn * 1000) + new Date().getTime();
+    private setProfile(): void {
+        const accessToken = this.authInfo.accessToken;
 
-        this.storageService.set(AuthenticationService.expiresAtKey, expiresAt);
-        this.authInfo.expiresAt = expiresAt;
+        if (!this.isAuthenticated()) {
+            return;
+        }
+
+        this.authenticationProvider.getUserProfile(accessToken).subscribe(
+            user => this.profileSubject.next(user)
+        );
     }
 }

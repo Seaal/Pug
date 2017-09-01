@@ -10,5 +10,4 @@ export interface AuthenticationConfig {
     redirectUri: string;
     scope: string;
     renewTokenUri: string;
-    defaultLoginRedirectUrl: string;
 }
