@@ -60,9 +60,33 @@ gulp.task("typescript", ["clean-typescript", "lint-typescript"], function () {
         .pipe($.sourcemaps.init())
         .pipe(tsProject())
         .js
+        .pipe($.sourcemaps.mapSources(function (sourcePath, file) {
+            var folderLevel = occurrences(sourcePath, "/") - 1;
+
+            return Array(folderLevel).join("../") + sourcePath;
+        }))
         .pipe($.sourcemaps.write("."))
         .pipe(gulp.dest(config.app.output));
 
+    function occurrences(string, subString) {
+
+        string += "";
+        subString += "";
+        if (subString.length <= 0) return (string.length + 1);
+
+        var n = 0,
+            pos = 0,
+            step = subString.length;
+
+        while (true) {
+            pos = string.indexOf(subString, pos);
+            if (pos >= 0) {
+                ++n;
+                pos += step;
+            } else break;
+        }
+        return n;
+    }
 });
 
 gulp.task("sync-typescript", ["typescript"], function () {
@@ -193,7 +217,8 @@ gulp.task("test", ["typescript", "templates", "component-styles", "libs"], funct
 
     new karmaServer({
         configFile: __dirname + "/" + config.karmaConfig,
-        singleRun: true
+        singleRun: true,
+        port: 9877
     }, done).start();
 });
 
