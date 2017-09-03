@@ -83,7 +83,7 @@ export class Auth0AuthenticationProvider implements IAuthenticationProvider {
         this.auth0.client.userInfo(accessToken, (err, profile) => {
             if (profile) {
                 profileSubject.next({
-                    userId: profile.sub,
+                    id: profile.sub,
                     nickname: profile.nickname
                 });
             } else if (err) {

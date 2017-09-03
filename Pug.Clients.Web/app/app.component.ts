@@ -12,11 +12,8 @@ export class AppComponent implements OnInit {
 
     public nickname: string = "";
 
-    constructor(localizationService: LocalizationService,
-                private authenticationService: AuthenticationService) {
-        localizationService.fallbackLanguage = "en-US";
-        localizationService.setLanguage("en-US");
-    }
+    constructor(private localizationService: LocalizationService,
+                private authenticationService: AuthenticationService) { }
 
     public ngOnInit() {
         this.authenticationService.initAuthentication();
@@ -24,6 +21,9 @@ export class AppComponent implements OnInit {
         this.authenticationService.profile().subscribe(profile => {
             this.nickname = profile ? profile.nickname : "";
         });
+
+        this.localizationService.fallbackLanguage = "en-US";
+        this.localizationService.setLanguage("en-US");
     }
 
     public isAuthenticated(): boolean {

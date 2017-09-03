@@ -92,7 +92,7 @@ export class AuthenticationService {
                 this.storageService.remove(AuthenticationService.redirectUrlKey);
 
                 if (redirectUrl) {
-                    this.router.navigateByUrl(redirectUrl).then(success => console.log(success));
+                    this.router.navigateByUrl(redirectUrl);
                 } else {
                     this.router.navigateByUrl(this.defaultLoginRedirectUrl || "");
                 }
@@ -104,7 +104,7 @@ export class AuthenticationService {
     }
 
     public isAuthenticated(): boolean {
-        return this.authInfo.expiresAt && new Date().getTime() < this.authInfo.expiresAt;
+        return !!this.authInfo.expiresAt && new Date().getTime() < this.authInfo.expiresAt;
     }
 
     public getAccessToken(): string {
@@ -125,9 +125,6 @@ export class AuthenticationService {
     }
 
     private scheduleRenewal(): void {
-        if (!this.isAuthenticated()) {
-            return;
-        }
 
         this.unscheduleRenewal();
 
@@ -139,11 +136,7 @@ export class AuthenticationService {
             }
         );
 
-        this.refreshSubscription = source
-            .subscribe(() => {
-                this.renewToken();
-                this.scheduleRenewal();
-            });
+        this.refreshSubscription = source.subscribe(() => this.renewToken());
     }
 
     private renewToken(): void {
@@ -173,10 +166,6 @@ export class AuthenticationService {
 
     private setProfile(): void {
         const accessToken = this.authInfo.accessToken;
-
-        if (!this.isAuthenticated()) {
-            return;
-        }
 
         this.authenticationProvider.getUserProfile(accessToken).subscribe(
             user => this.profileSubject.next(user)
