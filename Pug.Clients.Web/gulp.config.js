@@ -47,6 +47,11 @@
 
         },
 
+        coverage: {
+            input: "coverage/javascript/**/coverage.json",
+            output: "coverage/",
+        },
+
         fonts: {
             output: output + "fonts/",
             src: packages + "font-awesome/fonts/*"

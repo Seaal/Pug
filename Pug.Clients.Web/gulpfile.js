@@ -5,6 +5,7 @@ var $ = require("gulp-load-plugins")({ lazy: true });
 var del = require("del");
 var browserSync = require("browser-sync").create();
 var args = require("yargs").argv;
+var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 
 var config = require("./gulp.config")();
 var tsProject = $.typescript.createProject("tsconfig.json");
@@ -199,7 +200,7 @@ gulp.task("clean-fonts", function () {
 
     log("Cleaning fonts from output");
 
-    del(config.fonts.output + "**/*");
+    return del(config.fonts.output + "**/*");
 
 });
 
@@ -212,7 +213,7 @@ gulp.task("fonts", ["clean-fonts"], function () {
 
 });
 
-gulp.task("test", ["typescript", "templates", "component-styles", "libs"], function (done) {
+gulp.task("test", ["typescript", "templates", "component-styles", "libs", "clean-coverage"], function (done) {
     log("Testing clientside code");
 
     new karmaServer({
@@ -222,7 +223,21 @@ gulp.task("test", ["typescript", "templates", "component-styles", "libs"], funct
     }, done).start();
 });
 
-gulp.task("build-dev", ["libs", "typescript", "styles", "templates", "component-styles", "fonts", "test"], function () {
+gulp.task("clean-coverage", function () {
+
+    log("Cleaning test coverage");
+
+    return cleanCoverage();
+});
+
+gulp.task("remap-coverage", ["test", "clean-coverage"], function () {
+
+    log("Mapping test coverage");
+
+    return remapCoverage();
+});
+
+gulp.task("build-dev", ["libs", "typescript", "styles", "templates", "component-styles", "fonts", "test", "remap-coverage"], function () {
 
     log("Building for development");
 
@@ -276,5 +291,30 @@ function log(message) {
 }
 
 function runKarmaTests() {
-    karmaRunner.run({ port: 9876 }, function () { });
+    karmaRunner.run({ port: 9876 }, function () {
+        cleanCoverage().then(function () {
+            remapCoverage();
+        });
+    });
+}
+
+function remapCoverage() {
+    return gulp.src(config.coverage.input)
+        .pipe(remapIstanbul({
+            reports: {
+                html: "coverage"
+            },
+            mapFileName: function (filename) {
+                return filename.replace(/wwwroot(\/|\\)/, "");
+            }
+        }));
+}
+
+function cleanCoverage() {
+    return del([
+        config.coverage.output + "**/*",
+        "!" + config.coverage.input,
+        "!coverage/javascript",
+        "!coverage/javascript/**"
+    ]);
 }

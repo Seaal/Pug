@@ -86,15 +86,15 @@ module.exports = function (config) {
     reporters: ["dots", "coverage", "remap-coverage"],
 
     coverageReporter: {
-        type: "in-memory"
+        reporters: [
+            { type: "in-memory" },
+            { type: "json", dir: "coverage/javascript", file: "coverage.json" }
+        ]
+        
     },
 
     remapCoverageReporter: {
         "text-summary": null
-    },
-
-    remapOptions: {
-        basePath: "./app"
     },
 
     // web server port
