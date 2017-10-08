@@ -5,26 +5,18 @@ using Microsoft.Extensions.Logging;
 using SimpleInjector;
 using Pug.Client.Config;
 using Microsoft.Extensions.Configuration;
-using Pug.Clients.Web.Config;
+using Seaal.Authentication.Auth0;
+using Seaal.DependencyInjection.SimpleInjector;
 
 namespace Pug.Client
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfiguration Configuration { get; }
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            IConfigurationBuilder builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            
-            if(env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
-
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
         private Container container = new Container();
@@ -40,6 +32,10 @@ namespace Pug.Client
             services.AddMvc();
 
             services.AddSignalR(container);
+
+            services.AddAuth0Authentication(Configuration);
+
+            Configuration.GetSection("").Get<Auth0Config>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +52,7 @@ namespace Pug.Client
 
             app.UseStaticFiles();
 
-            app.UseAuthentication(Configuration);
+            app.UseAuthentication();
 
             app.UseSignalR();
 

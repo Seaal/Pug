@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: 1.0.1
+dotnet: 2.0.0
 dist: trusty
 before_script:
   - dotnet restore
@@ -13,3 +13,6 @@ script:
   - cd Pug.Clients.Web
   - gulp build-dev
   - cd ../
+  - dotnet test Pug.Api.Logic.Tests/
+  - dotnet test Pug.Api.ModelMappers.Tests/
+  - dotnet test Pug.Data.Tests/
