@@ -58,7 +58,7 @@ export class AuthenticationService {
             };
 
             this.scheduleRenewal();
-            this.setProfile();
+            this.setProfile().subscribe();
         }
     }
 
@@ -83,10 +83,9 @@ export class AuthenticationService {
     }
 
     public handleAuthentication(): void {
-        this.authenticationProvider.handleAuthentication().subscribe(
-            authResult => {
-                this.setSession(authResult);
-
+        this.authenticationProvider.handleAuthentication()
+            .flatMap(authResult => this.setSession(authResult))
+            .subscribe(authResult => {
                 const redirectUrl: string = this.storageService.get<string>(AuthenticationService.redirectUrlKey);
 
                 this.storageService.remove(AuthenticationService.redirectUrlKey);
@@ -140,13 +139,15 @@ export class AuthenticationService {
     }
 
     private renewToken(): void {
-        this.authenticationProvider.renewToken().subscribe(
-            authResult => this.setSession(authResult),
-            error => console.log(error)
+        this.authenticationProvider.renewToken()
+            .flatMap(authResult => this.setSession(authResult))
+            .subscribe(
+                undefined,
+                error => console.log(error)
         );
     }
 
-    private setSession(authResult: auth0.Auth0DecodedHash): void {
+    private setSession(authResult: auth0.Auth0DecodedHash): Observable<void> {
 
         const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
 
@@ -161,14 +162,15 @@ export class AuthenticationService {
         this.storageService.set(AuthenticationService.expiresAtKey, expiresAt);
 
         this.scheduleRenewal();
-        this.setProfile();
+
+        return this.setProfile()
+                   .map(() => { return; });
     }
 
-    private setProfile(): void {
+    private setProfile(): Observable<any> {
         const accessToken = this.authInfo.accessToken;
 
-        this.authenticationProvider.getUserProfile(accessToken).subscribe(
-            user => this.profileSubject.next(user)
-        );
+        return this.authenticationProvider.getUserProfile(accessToken)
+            .do(user => this.profileSubject.next(user));
     }
 }
