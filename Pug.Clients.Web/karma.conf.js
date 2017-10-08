@@ -40,6 +40,7 @@ module.exports = function (config) {
         { pattern: "node_modules/@ngx-translate/core/bundles/*.umd.js", included: false, watched: false },
         { pattern: "node_modules/tslib/tslib.js", included: false, watched: false },
         { pattern: "node_modules/moment/min/moment-with-locales.js", included: false, watched: false},
+        { pattern: "node_modules/auth0-js/build/auth0.js", included: false, watched: false},
 
         // Paths loaded via module imports:
         // Angular itself
@@ -74,7 +75,8 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        "wwwroot/app/**/!(*.spec).js": ["coverage"]
+        "wwwroot/app/**/!(*.spec).js": ["coverage"],
+        "wwwroot/app/**/*.js": ["sourcemap"]
     },
 
 
@@ -84,15 +86,15 @@ module.exports = function (config) {
     reporters: ["dots", "coverage", "remap-coverage"],
 
     coverageReporter: {
-        type: "in-memory"
+        reporters: [
+            { type: "in-memory" },
+            { type: "json", dir: "coverage/javascript", file: "coverage.json" }
+        ]
+        
     },
 
     remapCoverageReporter: {
         "text-summary": null
-    },
-
-    remapOptions: {
-        basePath: "./app"
     },
 
     // web server port

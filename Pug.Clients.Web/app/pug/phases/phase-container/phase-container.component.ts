@@ -21,7 +21,7 @@ export class PhaseContainerComponent implements OnInit {
                 private componentFactoryResolver: ComponentFactoryResolver) { }
 
     public ngOnInit() {
-        this.phaseService.currentPhase.subscribe((phaseStrategy) => {
+        this.phaseService.currentPhase.subscribe(phaseStrategy => {
             this.currentPhaseStrategy = phaseStrategy;
             this.loadPhase();
         });

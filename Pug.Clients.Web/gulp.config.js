@@ -30,7 +30,8 @@
                 packages + "tslib/tslib.js",
                 "!" + packages + "rxjs/bundles/*",
                 packages + "@ngx-translate/**/bundles/*",
-                packages + "moment/min/moment-with-locales.js"
+                packages + "moment/min/moment-with-locales.js",
+                packages + "auth0-js/build/auth0.js"
             ],
             //Statically loaded in Index.cshtml
             src: [
@@ -44,6 +45,11 @@
                 packages + "font-awesome/css/font-awesome.css"
             ]
 
+        },
+
+        coverage: {
+            input: "coverage/javascript/**/coverage.json",
+            output: "coverage/",
         },
 
         fonts: {

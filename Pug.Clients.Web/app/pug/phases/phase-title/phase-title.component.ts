@@ -20,11 +20,11 @@ export class PhaseTitleComponent implements OnInit {
 
     public ngOnInit(): void {
 
-        this.phaseService.currentPhase.subscribe((phaseStrategy) =>
+        this.phaseService.currentPhase.subscribe(phaseStrategy =>
             this.title = phaseStrategy.getPhaseActionMessage(this.pug)
         );
 
-        this.phaseService.phaseExpiry.subscribe((timeRemaining) =>
+        this.phaseService.phaseExpiry.subscribe(timeRemaining =>
             this.timeRemaining = timeRemaining
         );
     }

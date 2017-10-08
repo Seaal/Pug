@@ -9,11 +9,11 @@ import { PhaseService } from "./phases/phase.service";
 describe("PickUpGameService", () => {
 
     let pugService: PickUpGameService;
-    let requestService: RequestService;
+    let requestService: jasmine.SpyObj<RequestService>;
     let phaseService: PhaseService;
 
     beforeEach(() => {
-        requestService = jasmine.createSpyObj("requestService", ["get"]);
+        requestService = jasmine.createSpyObj<RequestService>("requestService", ["get"]);
         phaseService = jasmine.createSpyObj("phaseService", ["setCurrentPhase"]);
 
         pugService = new PickUpGameService(requestService, phaseService);
@@ -21,7 +21,7 @@ describe("PickUpGameService", () => {
 
     describe("getPug", () => {
         beforeEach(() => {
-            (<jasmine.Spy>requestService.get).and.returnValue(Observable.of({
+            requestService.get.and.returnValue(Observable.of({
                 id: 17,
                 currentPhase: {
                     type: 1,
@@ -32,7 +32,7 @@ describe("PickUpGameService", () => {
 
         it("should return pug object from requestService", () => {
             //Act
-            pugService.getPug().subscribe((pug) =>
+            pugService.getPug().subscribe(pug =>
                 //Assert
                 expect(pug.id).toEqual(17)
             );

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using SimpleInjector;
 using Pug.Client.Config;
 using Microsoft.Extensions.Configuration;
-using Seaal.Data.MongoDB;
+using Pug.Clients.Web.Config;
 
 namespace Pug.Client
 {
@@ -15,10 +15,16 @@ namespace Pug.Client
 
         public Startup(IHostingEnvironment env)
         {
-            Configuration = new ConfigurationBuilder()
+            IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            
+            if(env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         private Container container = new Container();
@@ -49,6 +55,8 @@ namespace Pug.Client
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication(Configuration);
 
             app.UseSignalR();
 

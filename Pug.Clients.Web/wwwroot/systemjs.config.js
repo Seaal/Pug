@@ -29,7 +29,8 @@
             "@ngx-translate/core": "npm:@ngx-translate/core/bundles/core.umd.js",
             "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/http-loader.umd.js",
             "tslib": "npm:tslib/tslib.js",
-            "moment": "npm:moment/min/moment-with-locales.js"
+            "moment": "npm:moment/min/moment-with-locales.js",
+            "auth0-js": "npm:auth0-js/build/auth0.js"
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -50,6 +51,9 @@
                 defaultExtension: "js"
             },
             moment: {
+                defaultExtension: "js"
+            },
+            "auth0-js": {
                 defaultExtension: "js"
             }
         }
