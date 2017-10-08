@@ -13,6 +13,6 @@ script:
   - cd Pug.Clients.Web
   - gulp build-dev
   - cd ../
-  - dotnet test Pug.Api.Logic.Tests/ --no-build
-  - dotnet test Pug.Api.ModelMappers.Tests/ --no-build
-  - dotnet test Pug.Data.Tests/ --no-build
+  - dotnet test Pug.Api.Logic.Tests/
+  - dotnet test Pug.Api.ModelMappers.Tests/
+  - dotnet test Pug.Data.Tests/
