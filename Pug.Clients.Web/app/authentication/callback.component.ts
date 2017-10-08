@@ -2,7 +2,7 @@
 import { AuthenticationService } from "./authentication.service";
 
 @Component({
-    template: ``
+    template: `Logging you in...`
 })
 export class CallbackComponent implements OnInit {
 
