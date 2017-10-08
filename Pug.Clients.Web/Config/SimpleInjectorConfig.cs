@@ -48,7 +48,7 @@ namespace Pug.Client.Config
             container.Verify();
         }
 
-        public static void RegisterOptions(this IConfigurationRoot configuration, Container container)
+        public static void RegisterOptions(this IConfiguration configuration, Container container)
         {
             RegisterOptions<MongoConfig>(configuration.GetSection("mongoConfig"), container);
         }
