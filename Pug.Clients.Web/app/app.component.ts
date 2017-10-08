@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     public nickname: string = "";
 
     constructor(private localizationService: LocalizationService,
-                private authenticationService: AuthenticationService) { }
+                public authenticationService: AuthenticationService) { }
 
     public ngOnInit() {
         this.authenticationService.initAuthentication();
@@ -29,13 +29,4 @@ export class AppComponent implements OnInit {
     public isAuthenticated(): boolean {
         return this.authenticationService.isAuthenticated();
     }
-
-    public login(): void {
-        this.authenticationService.login();
-    }
-
-    public logout(): void {
-        this.authenticationService.logout();
-    }
-
 }

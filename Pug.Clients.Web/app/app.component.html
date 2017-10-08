@@ -5,7 +5,7 @@
         Hello {{nickname}}
 
         <button class="btn btn-primary"
-                (click)="logout()">
+                (click)="authenticationService.logout()">
             Log Out
         </button>
     </div> 
@@ -13,7 +13,7 @@
 
     <button class="btn btn-primary"
             *ngIf="!isAuthenticated()"
-            (click)="login()">
+            (click)="authenticationService.login()">
         Log In
     </button>
 </div>
