@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Seaal.Authentication.Auth0
 {
-    public static class ApplicationBuilderExtensions
+    public static class IServiceCollectionExtensions
     {
         public static void AddAuth0Authentication(this IServiceCollection services, IConfiguration configuration)
         {
