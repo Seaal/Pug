@@ -6,6 +6,7 @@ using SimpleInjector;
 using Pug.Client.Config;
 using Microsoft.Extensions.Configuration;
 using Seaal.Authentication.Auth0;
+using Seaal.DependencyInjection.SimpleInjector;
 
 namespace Pug.Client
 {
