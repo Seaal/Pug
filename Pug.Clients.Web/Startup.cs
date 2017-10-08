@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using SimpleInjector;
 using Pug.Client.Config;
 using Microsoft.Extensions.Configuration;
-using Pug.Clients.Web.Config;
+using Seaal.Authentication.Auth0;
 
 namespace Pug.Client
 {
@@ -31,6 +31,10 @@ namespace Pug.Client
             services.AddMvc();
 
             services.AddSignalR(container);
+
+            services.AddAuth0Authentication(Configuration);
+
+            Configuration.GetSection("").Get<Auth0Config>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +51,7 @@ namespace Pug.Client
 
             app.UseStaticFiles();
 
-            app.UseAuthentication(Configuration);
+            app.UseAuthentication();
 
             app.UseSignalR();
 
