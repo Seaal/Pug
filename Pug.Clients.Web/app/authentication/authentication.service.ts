@@ -110,7 +110,7 @@ export class AuthenticationService {
         return this.authInfo.accessToken;
     }
 
-    public profile(): Observable<User> {
+    public get profile(): Observable<User> {
         return this.profileSubject.asObservable();
     }
 

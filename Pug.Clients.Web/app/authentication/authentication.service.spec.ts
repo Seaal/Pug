@@ -81,7 +81,7 @@ describe("AuthenticationService", () => {
                 //Arrange
                 let currentUser: User;
 
-                authenticationService.profile().subscribe(u => currentUser = u);
+                authenticationService.profile.subscribe(u => currentUser = u);
 
                 //Act
                 authenticationService.initAuthentication();
@@ -131,7 +131,7 @@ describe("AuthenticationService", () => {
                 //Arrange
                 let currentUser: User;
 
-                authenticationService.profile().subscribe(u => currentUser = u);
+                authenticationService.profile.subscribe(u => currentUser = u);
 
                 //Act
                 authenticationService.initAuthentication();
@@ -208,7 +208,7 @@ describe("AuthenticationService", () => {
                 //Arrange
                 let currentUser: User;
 
-                authenticationService.profile().subscribe(u => currentUser = u);
+                authenticationService.profile.subscribe(u => currentUser = u);
 
                 //Act
                 authenticationService.initAuthentication();
@@ -305,7 +305,7 @@ describe("AuthenticationService", () => {
             //Arrange
             let currentUser = user;
 
-            authenticationService.profile().subscribe(u => currentUser = u);
+            authenticationService.profile.subscribe(u => currentUser = u);
 
             //Act
             authenticationService.logout();
@@ -377,7 +377,7 @@ describe("AuthenticationService", () => {
             //Arrange
             let currentUser: User;
 
-            authenticationService.profile().subscribe(u => currentUser = u);
+            authenticationService.profile.subscribe(u => currentUser = u);
 
             //Act
             authenticationService.handleAuthentication();

@@ -8,6 +8,7 @@ import { AppComponent } from "./app.component";
 import { LocalizationService } from "./common/localization.service";
 import { AuthenticationService } from "./authentication/authentication.service";
 import { User } from "./authentication/user";
+import { ReplaySubject } from "rxjs/ReplaySubject";
 
 describe("AppComponent", () => {
 
@@ -16,10 +17,14 @@ describe("AppComponent", () => {
 
     let localizationService: jasmine.SpyObj<LocalizationService>;
     let authenticationService: jasmine.SpyObj<AuthenticationService>;
+    let profileSubject: ReplaySubject<any>;
 
     beforeEach(async(() => {
         const localizationServiceSpy = jasmine.createSpyObj("localizationService", ["setLanguage"]);
-        const authenticationServiceSpy = jasmine.createSpyObj<AuthenticationService>("authenticationService", ["isAuthenticated", "initAuthentication", "profile"]);
+        const authenticationServiceSpy = jasmine.createSpyObj<AuthenticationService>("authenticationService", ["isAuthenticated", "initAuthentication"]);
+
+        profileSubject = new ReplaySubject<any>(1);
+        (authenticationServiceSpy as any).profile = profileSubject;
 
         TestBed.configureTestingModule({
             declarations: [AppComponent],
@@ -44,7 +49,7 @@ describe("AppComponent", () => {
             nickname: "bar"
         };
 
-        authenticationService.profile.and.returnValue(Observable.of(user));
+        profileSubject.next(user);
     });
 
     describe("ngOnInit", () => {
@@ -82,7 +87,7 @@ describe("AppComponent", () => {
 
         it("when users profile is null should set nickname to empty string", () => {
             //Arrange
-            authenticationService.profile.and.returnValue(Observable.of(null));
+            profileSubject.next(null);
 
             //Act
             fixture.detectChanges();
