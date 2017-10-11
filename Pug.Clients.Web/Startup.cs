@@ -29,7 +29,11 @@ namespace Pug.Client
 
             Configuration.RegisterOptions(container);
 
-            services.AddMvc();
+            services.AddMvc()
+                    .AddRazorPagesOptions(options =>
+                    {
+                        options.Conventions.AddPageRoute("/Index", "{*url:regex(^(?!api).*$)}");
+                    });
 
             services.AddSignalR(container);
 
@@ -56,13 +60,7 @@ namespace Pug.Client
 
             app.UseSignalR();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapSpaFallbackRoute(
-                    name: "default",
-                    defaults: new { controller = "Home", action = "Index" }
-                );
-            });
+            app.UseMvc();
         }
     }
 }
