@@ -2,6 +2,8 @@ language: csharp
 mono: none
 dotnet: 2.0.0
 dist: trusty
+addons:
+  chrome: stable
 before_script:
   - dotnet restore
   - cd Pug.Clients.Web
