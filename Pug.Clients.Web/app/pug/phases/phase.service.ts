@@ -27,7 +27,7 @@ export class PhaseService {
         let phaseDuration: number = expiryTime.diff(currentTime, "seconds");
 
         if (phaseDuration > 0) {
-            let intervalId = setInterval(() => {
+            const intervalId = setInterval(() => {
                 phaseDuration -= 1;
 
                 this.phaseExpirySubject.next(phaseDuration);
@@ -41,11 +41,11 @@ export class PhaseService {
         this.phaseExpirySubject.next(phaseDuration);
 
         this.currentPhaseSubject.next(phaseStrategy);
-    };
+    }
 
     public get currentPhase(): Observable<IPhaseStrategy> {
         return this.currentPhaseSubject.asObservable();
-    };
+    }
 
     public get phaseExpiry(): Observable<number> {
         return this.phaseExpirySubject.asObservable();

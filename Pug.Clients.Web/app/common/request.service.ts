@@ -19,15 +19,15 @@ export class RequestService {
     }
 
     public get<T>(url: string): Observable<T> {
-        let options = this.setOptions();
+        const options = this.setOptions();
 
         return this.httpClient.get<T>(this.apiEndpoint + url, options);
     }
 
     private setOptions() {
-        let token: string = this.authenticationService.getAccessToken();
+        const token: string = this.authenticationService.getAccessToken();
 
-        let headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+        const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
         return {
             headers

@@ -28,9 +28,9 @@ const authConfig: AuthenticationConfig = {
     clientId: "9-1XEF_anI8ih2_UJUrP1edekKGhKSEB",
     domain: "seaal-dev.auth0.com",
     responseType: "token id_token",
-    audience: 'https://pug.gg/api/',
-    redirectUri: 'http://localhost:3000/auth/callback',
-    renewTokenUri: 'http://localhost:3000/auth/renewtoken',
+    audience: "https://pug.gg/api/",
+    redirectUri: "http://localhost:3000/auth/callback",
+    renewTokenUri: "http://localhost:3000/auth/renewtoken",
     scope: "openid profile test:scope"
 };
 

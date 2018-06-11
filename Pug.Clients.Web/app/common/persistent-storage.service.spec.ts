@@ -38,6 +38,7 @@ describe("PersistentStorageService", () => {
 
         it("should return a string when localStorage value is a json string", () => {
             //Arrange
+            // tslint:disable-next-line:quotemark
             localStorage.setItem(key, '"foobar"');
 
             //Act
@@ -60,6 +61,7 @@ describe("PersistentStorageService", () => {
 
         it("should return an object when localStorage value is a json object", () => {
             //Arrange
+            // tslint:disable-next-line:quotemark
             localStorage.setItem(key, '{"foo": "bar", "baz": 12345 }');
 
             //Act
@@ -103,6 +105,7 @@ describe("PersistentStorageService", () => {
             storageService.set(key, data);
 
             //Assert
+            // tslint:disable-next-line:quotemark
             expect(localStorage.getItem(key)).toBe('"foobar"');
         });
 
@@ -125,6 +128,7 @@ describe("PersistentStorageService", () => {
             storageService.set(key, data);
 
             //Assert
+            // tslint:disable-next-line:quotemark
             expect(localStorage.getItem(key)).toBe('{"foo":"bar","baz":12345}');
         });
 

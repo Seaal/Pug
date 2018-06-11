@@ -33,8 +33,8 @@ export class PhaseContainerComponent implements OnInit {
         const viewContainerRef = this.phaseHost.viewContainerRef;
         viewContainerRef.clear();
 
-        const componentRef = viewContainerRef.createComponent(componentFactory);
+        const componentRef = viewContainerRef.createComponent<IPhaseComponent>(componentFactory);
 
-        (<IPhaseComponent>componentRef.instance).pug = this.pug;
+        componentRef.instance.pug = this.pug;
     }
 }

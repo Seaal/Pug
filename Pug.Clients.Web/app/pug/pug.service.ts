@@ -13,7 +13,7 @@ export class PugService {
     }
 
     public logListener(): Observable<string> {
-	    return this.signalrService.on<string>("pugHub", "serverLog");
+        return this.signalrService.on<string>("pugHub", "serverLog");
     }
 
     public start(): Observable<boolean> {

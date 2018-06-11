@@ -13,7 +13,7 @@ export class SignalRService {
     }
 
     public start(): Observable<boolean> {
-        let subject: Subject<boolean> = new Subject<boolean>();
+        const subject: Subject<boolean> = new Subject<boolean>();
 
         this.connection.start({
             waitForPageLoad: false
@@ -26,9 +26,9 @@ export class SignalRService {
     }
 
     public on<T>(hubName: string, methodName: string): Observable<T> {
-        let proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
+        const proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
 
-        let subject: Subject<T> = new Subject<T>();
+        const subject: Subject<T> = new Subject<T>();
 
         proxy.on(methodName, (data: T) => subject.next(data));
 
@@ -36,9 +36,9 @@ export class SignalRService {
     }
 
     public send<TReturn>(hubName: string, methodName: string, ...data: any[]): Observable<TReturn> {
-        let proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
+        const proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
 
-        let subject: Subject<TReturn> = new Subject<TReturn>();
+        const subject: Subject<TReturn> = new Subject<TReturn>();
 
         data.unshift(methodName);
 
