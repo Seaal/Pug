@@ -1,7 +1,6 @@
 ﻿import { Injectable, Inject } from "@angular/core";
 
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
+import { Observable, Subject } from "rxjs";
 import * as auth0 from "auth0-js";
 
 import { AuthenticationConfig, AUTHENTICATION_CONFIG } from "../authentication-config";

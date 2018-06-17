@@ -1,5 +1,5 @@
 ﻿import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Rx";
+import { Observable } from "rxjs";
 
 import { SignalRService } from "../common/signalr.service";
 import { Server } from "./server";

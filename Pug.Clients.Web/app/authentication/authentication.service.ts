@@ -1,16 +1,14 @@
 ﻿import { Injectable, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
-import { Subscription } from "rxjs/Subscription";
+import { Observable, Subscription, ReplaySubject, of, timer } from "rxjs";
+import { flatMap, map, tap } from "rxjs/operators";
 import * as auth0 from "auth0-js";
 
 import { PersistentStorageService } from "../common/persistent-storage.service";
 import { AuthenticationInfo } from "./authentication-info";
 import { IAuthenticationProvider, AUTHENTICATION_PROVIDER } from "./iauthentication.provider";
 import { User } from "./user";
-import { ReplaySubject } from "rxjs/ReplaySubject";
 
 @Injectable()
 export class AuthenticationService {
@@ -84,8 +82,8 @@ export class AuthenticationService {
 
     public handleAuthentication(): void {
         this.authenticationProvider.handleAuthentication()
-            .flatMap(authResult => this.setSession(authResult))
-            .subscribe(authResult => {
+            .pipe(flatMap(authResult => this.setSession(authResult)))
+            .subscribe(() => {
                 const redirectUrl: string = this.storageService.get<string>(AuthenticationService.redirectUrlKey);
 
                 this.storageService.remove(AuthenticationService.redirectUrlKey);
@@ -127,20 +125,20 @@ export class AuthenticationService {
 
         this.unscheduleRenewal();
 
-        const source = Observable.of(this.authInfo.expiresAt).flatMap(
+        const source = of(this.authInfo.expiresAt).pipe(flatMap(
             expires => {
                 const now = Date.now();
 
-                return Observable.timer(Math.max(1, expires - now));
+                return timer(Math.max(1, expires - now));
             }
-        );
+        ));
 
         this.refreshSubscription = source.subscribe(() => this.renewToken());
     }
 
     private renewToken(): void {
         this.authenticationProvider.renewToken()
-            .flatMap(authResult => this.setSession(authResult))
+            .pipe(flatMap(authResult => this.setSession(authResult)))
             .subscribe(
                 undefined,
                 error => console.log(error)
@@ -164,13 +162,13 @@ export class AuthenticationService {
         this.scheduleRenewal();
 
         return this.setProfile()
-                   .map(() => { return; });
+                   .pipe(map(() => { return; }));
     }
 
     private setProfile(): Observable<any> {
         const accessToken = this.authInfo.accessToken;
 
         return this.authenticationProvider.getUserProfile(accessToken)
-            .do(user => this.profileSubject.next(user));
+            .pipe(tap(user => this.profileSubject.next(user)));
     }
 }

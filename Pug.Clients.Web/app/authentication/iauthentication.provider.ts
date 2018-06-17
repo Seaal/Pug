@@ -1,6 +1,6 @@
 ﻿import { InjectionToken } from "@angular/core";
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { AuthenticationResult } from "./authentication-result";
 import { User } from "./user";
 

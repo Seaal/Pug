@@ -1,7 +1,6 @@
 ﻿import { Injectable } from "@angular/core";
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 import { PickUpGame } from "./pick-up-game";
 import { PickUpGameService } from "./pick-up-game.service";

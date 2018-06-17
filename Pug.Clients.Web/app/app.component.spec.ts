@@ -1,14 +1,11 @@
-﻿import { ComponentFixture, TestBed, async, inject } from "@angular/core/testing";
+﻿import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/empty";
+import { ReplaySubject } from "rxjs";
 
 import { AppComponent } from "./app.component";
 import { LocalizationService } from "./common/localization.service";
 import { AuthenticationService } from "./authentication/authentication.service";
 import { User } from "./authentication/user";
-import { ReplaySubject } from "rxjs/ReplaySubject";
 
 describe("AppComponent", () => {
 

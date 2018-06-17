@@ -1,7 +1,6 @@
 ﻿import { Injectable } from "@angular/core";
 
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { Observable } from "rxjs/Observable";
+import { Observable, ReplaySubject } from "rxjs";
 
 import { PugPhase } from "./pug-phase";
 import { PugPhaseStrategyFactory } from "./pug-phase-strategy.factory";

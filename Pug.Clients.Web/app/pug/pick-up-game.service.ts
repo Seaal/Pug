@@ -1,6 +1,7 @@
 ﻿import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { Player } from "./player";
+import { Observable } from "rxjs";
+import { tap } from "rxjs/operators";
+
 import { PickUpGame } from "./pick-up-game";
 import { PhaseService } from "./phases/phase.service";
 import { RequestService } from "../common/request.service";
@@ -13,7 +14,7 @@ export class PickUpGameService {
 
     public getPug(): Observable<PickUpGame> {
         return this.requestService.get<PickUpGame>(`pug/5993a9e08e45e9871eec42df`)
-                                  .do(pug => this.phaseService.setCurrentPhase(pug.currentPhase));
+                                  .pipe(tap(pug => this.phaseService.setCurrentPhase(pug.currentPhase)));
     }
 
 }
