@@ -1,52 +1,24 @@
-﻿using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Owin.Builder;
-using Newtonsoft.Json;
-using Owin;
-using SimpleInjector;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using PugClient.Hubs;
 
 namespace Pug.Client.Config
 {
     public static class SignalRConfig
     {
-        public static void AddSignalR(this IServiceCollection services, Container container)
+        public static void AddSignalR(this IServiceCollection services)
         {
-            //Add camelCase support for json messages in SignalR
-            JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+            services.AddSignalR(builder =>
             {
-                ContractResolver = new SignalRContractResolver()
-            };
-
-            JsonSerializer serializer = JsonSerializer.Create(serializerSettings);
-
-            GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => serializer);
-
-            //Add Dependency Injection to SignalR
-            IHubActivator hubActivator = new SimpleInjectorHubActivator(container);
-
-            GlobalHost.DependencyResolver.Register(typeof(IHubActivator), () => hubActivator);
+                builder.EnableDetailedErrors = true;
+            });
         }
 
         public static void UseSignalR(this IApplicationBuilder app)
         {
-            app.UseOwin(addToPipeline =>
+            app.UseSignalR(routes =>
             {
-                addToPipeline(next =>
-                {
-                    var appBuilder = new AppBuilder();
-                    appBuilder.Properties["builder.DefaultApp"] = next;
-
-                    IAppBuilder iAppBuilder = appBuilder;
-
-                    iAppBuilder.MapSignalR();
-
-                    return appBuilder.Build<Func<IDictionary<string, object>, Task>>();
-                });
+                routes.MapHub<PugHub>("/hubs/pug");
             });
         }
     }

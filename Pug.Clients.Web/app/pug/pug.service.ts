@@ -1,30 +1,30 @@
 ﻿import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { SignalRService } from "../common/signalr.service";
 import { Server } from "./server";
+import { PugRealTimeService } from "./pug-real-time.service";
 
 @Injectable()
 export class PugService {
-    constructor(private signalrService: SignalRService) { }
+    constructor(private pugRealTimeService: PugRealTimeService) { }
 
     public initListener(): Observable<Server> {
-        return this.signalrService.on<Server>("pugHub", "serverUpdate");
+        return this.pugRealTimeService.onServerUpdate();
     }
 
     public logListener(): Observable<string> {
-        return this.signalrService.on<string>("pugHub", "serverLog");
+        return this.pugRealTimeService.onServerLog();
     }
 
-    public start(): Observable<boolean> {
-        return this.signalrService.start();
+    public start(): Observable<void> {
+        return this.pugRealTimeService.start();
     }
 
     public createServer(): Observable<Server> {
-        return this.signalrService.send<Server>("pugHub", "createServer");
+        return this.pugRealTimeService.createServer();
     }
 
     public deleteServer(serverId: string): Observable<boolean> {
-        return this.signalrService.send<boolean>("pugHub", "deleteServer", serverId);
+        return this.pugRealTimeService.deleteServer(serverId);
     }
 }

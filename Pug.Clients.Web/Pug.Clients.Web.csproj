@@ -17,6 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\**" />
+    <Content Remove="Views\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
@@ -33,12 +40,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.2.3" />
-    <PackageReference Include="Microsoft.AspNet.SignalR.Owin" Version="1.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
@@ -49,18 +55,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Owin" Version="4.0.0" />
-    <PackageReference Include="Owin" Version="1.0.0" />
     <PackageReference Include="SimpleInjector" Version="4.3.0" />
     <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>

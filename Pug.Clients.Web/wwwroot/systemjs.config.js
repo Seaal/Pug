@@ -30,7 +30,8 @@
             "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/ngx-translate-http-loader.umd.js",
             "tslib": "npm:tslib/tslib.js",
             "moment": "npm:moment/min/moment-with-locales.js",
-            "auth0-js": "npm:auth0-js/build/auth0.js"
+            "auth0-js": "npm:auth0-js/build/auth0.js",
+            "@aspnet/signalr": "npm:@aspnet/signalr/dist/browser/signalr.js"
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -59,6 +60,9 @@
                 defaultExtension: "js"
             },
             "auth0-js": {
+                defaultExtension: "js"
+            },
+            "@aspnet/signalr": {
                 defaultExtension: "js"
             }
         }
