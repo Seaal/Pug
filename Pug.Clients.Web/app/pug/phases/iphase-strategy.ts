@@ -2,7 +2,7 @@
 
 import { PickUpGame } from "../pick-up-game";
 import { IBasePugPhaseStrategy } from "./ibase-pug-phase-strategy";
-import { Localization } from "../../common/localization";
+import { Localization } from "../../common/localization/localization";
 
 export interface IPhaseStrategy extends IBasePugPhaseStrategy {
     getPhaseComponent(): Type<any>;

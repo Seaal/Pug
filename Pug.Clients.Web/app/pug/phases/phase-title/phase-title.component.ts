@@ -1,8 +1,7 @@
-﻿import { Component, Input, OnInit, SimpleChanges } from "@angular/core";
-import { IPhaseStrategy } from "../iphase-strategy";
+﻿import { Component, Input, OnInit } from "@angular/core";
 import { PickUpGame } from "../../pick-up-game";
 import { PhaseService } from "../phase.service";
-import { Localization } from "../../../common/localization";
+import { Localization } from "../../../common/localization/localization";
 
 @Component({
     moduleId: module.id,

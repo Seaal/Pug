@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { LocalizationService } from "./common/localization.service";
+import { LocalizationService } from "./common/localization/localization.service";
 import { AuthenticationService } from "./authentication/authentication.service";
 
 @Component({

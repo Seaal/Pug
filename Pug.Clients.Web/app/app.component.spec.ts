@@ -3,7 +3,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { ReplaySubject } from "rxjs";
 
 import { AppComponent } from "./app.component";
-import { LocalizationService } from "./common/localization.service";
+import { LocalizationService } from "./common/localization/localization.service";
 import { AuthenticationService } from "./authentication/authentication.service";
 import { User } from "./authentication/user";
 
