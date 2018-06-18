@@ -6,6 +6,7 @@ var del = require("del");
 var browserSync = require("browser-sync").create();
 var args = require("yargs").argv;
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
+var log = require('fancy-log');
 
 var config = require("./gulp.config")();
 var tsProject = $.typescript.createProject("tsconfig.json");
