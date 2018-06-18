@@ -35,7 +35,7 @@ namespace PugClient.Hubs
             gameServer.MessagesObservable.Subscribe(data => Clients.All.ServerLog(data));
             gameServer.ErrorsObservable.Subscribe(data => Clients.All.ServerLog(data));
 
-            Clients.OthersInGroup("lobby").ServerUpdate(server);
+            await Clients.OthersInGroup("lobby").ServerUpdate(server);
 
             return server;
         }

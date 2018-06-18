@@ -16,6 +16,8 @@ namespace Pug.Client.Config
             container.RegisterMvcControllers(app);
             container.RegisterMvcViewComponents(app);
 
+            container.AutoCrossWireAspNetComponents(app);
+
             // Cross-wire ASP.NET services
             container.CrossWire<ILoggerFactory>(app);
 

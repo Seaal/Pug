@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace PugClient.Hubs
 {
     public interface IPugPushMethods
     {
-        void ServerUpdate(ServerInfo serverInfo);
-        void ServerLog(string data);
+        Task ServerUpdate(ServerInfo serverInfo);
+        Task ServerLog(string data);
     }
 }
