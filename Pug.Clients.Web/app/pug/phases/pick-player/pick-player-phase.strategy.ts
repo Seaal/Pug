@@ -5,7 +5,7 @@ import { PickUpGame } from "../../pick-up-game";
 import { PickPlayerPugPhase } from "./pick-player-pug-phase";
 import { BasePugPhaseStrategy } from "../base-pug-phase.strategy";
 import { PickPlayerPhaseComponent } from "./pick-player-phase.component";
-import { Localization } from "../../../common/localization";
+import { Localization } from "../../../common/localization/localization";
 
 export class PickPlayerPhaseStrategy extends BasePugPhaseStrategy<PickPlayerPugPhase> implements IPhaseStrategy {
 

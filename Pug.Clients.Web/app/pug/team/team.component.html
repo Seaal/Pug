@@ -1,8 +1,8 @@
 ﻿<div class="team">
-    <h2>{{ "pug.labels.team" | translate:team }}</h2>
+    <h2>{{ "pug.labels.team" | localize:team }}</h2>
     <p>Captain: {{ team.captain.name }}</p>
 
-    <p>{{ "pug.labels.team_members" | translate }}</p>
+    <p>{{ "pug.labels.team_members" | localize }}</p>
     <ul>
         <li *ngFor="let player of team.players">{{player.name}}</li>
     </ul>

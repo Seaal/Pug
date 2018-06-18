@@ -1,8 +1,6 @@
 ﻿import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { TranslateModule } from "@ngx-translate/core";
-
 import { PugRoutingModule } from "./pug-routing.module";
 
 import { PugService } from "./pug.service";
@@ -18,11 +16,33 @@ import { TeamComponent } from "./team/team.component";
 import { PickUpGameResolver } from "./pick-up-game.resolver";
 import { PhaseContainerComponent } from "./phases/phase-container/phase-container.component";
 import { PhaseHostDirective } from "./phases/phase-container/phase-host.directive";
+import { LocalizationModule } from "../common/localization/localization.module";
 
 @NgModule({
-    entryComponents: [PickPlayerPhaseComponent],
-    imports: [CommonModule, PugRoutingModule, TranslateModule.forChild()],
-    declarations: [LobbyComponent, PickUpGameComponent, PlayerItemComponent, PickPlayerPhaseComponent, PhaseTitleComponent, TeamComponent, PhaseContainerComponent, PhaseHostDirective],
-    providers: [PugService, PickUpGameService, PhaseService, PugPhaseStrategyFactory, PickUpGameResolver]
+    entryComponents: [
+        PickPlayerPhaseComponent
+    ],
+    imports: [
+        CommonModule,
+        PugRoutingModule,
+        LocalizationModule
+    ],
+    declarations: [
+        LobbyComponent,
+        PickUpGameComponent,
+        PlayerItemComponent,
+        PickPlayerPhaseComponent,
+        PhaseTitleComponent,
+        TeamComponent,
+        PhaseContainerComponent,
+        PhaseHostDirective
+    ],
+    providers: [
+        PugService,
+        PickUpGameService,
+        PhaseService,
+        PugPhaseStrategyFactory,
+        PickUpGameResolver
+    ]
 })
 export class PugModule { }
