@@ -34,7 +34,7 @@ namespace Pug.Client.Config
 
         private static void RegisterOptions<T>(IConfigurationSection configurationSection, Container container) where T : class
         {
-            container.RegisterSingleton(configurationSection.Get<T>());
+            container.RegisterInstance(configurationSection.Get<T>());
         }
     }
 }

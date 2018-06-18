@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
 using Pug.ServerManager;
-using Microsoft.AspNet.SignalR;
 
 namespace PugClient.Hubs
 {
-    public class PugHub : Hub
+    public class PugHub : Hub<IPugPushMethods>
     {
         private readonly IGameServerManager _serverManager;
 
@@ -15,11 +14,11 @@ namespace PugClient.Hubs
             _serverManager = serverManager;
         }
 
-        public override Task OnConnected()
+        public override async Task OnConnectedAsync()
         {
-            Groups.Add(Context.ConnectionId, "lobby");
+            await Groups.AddToGroupAsync(Context.ConnectionId, "lobby");
 
-            return base.OnConnected();
+            await base.OnConnectedAsync();
         }
 
         public async Task<ServerInfo> CreateServer()
