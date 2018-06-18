@@ -3,13 +3,13 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { CallbackComponent } from "./callback.component";
 
-const pugRoutes: Routes = [
+const authRoutes: Routes = [
     { path: "auth/callback", component: CallbackComponent }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forChild(pugRoutes)
+        RouterModule.forChild(authRoutes)
     ],
     exports: [
         RouterModule

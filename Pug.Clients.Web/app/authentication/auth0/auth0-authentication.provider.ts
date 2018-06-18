@@ -25,7 +25,7 @@ export class Auth0AuthenticationProvider implements IAuthenticationProvider {
     }
 
     public displayLogin(): void {
-        this.auth0.authorize(undefined);
+        this.auth0.authorize();
     }
 
     public handleAuthentication(): Observable<AuthenticationResult> {
