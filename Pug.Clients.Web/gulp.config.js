@@ -2,7 +2,7 @@
 
     var output = "wwwroot/";
     var packages = "node_modules/";
-    var home = "Views/Home/";
+    var home = "Pages/";
 
     var config = {
         output: output,
@@ -31,16 +31,15 @@
                 "!" + packages + "rxjs/bundles/*",
                 packages + "@ngx-translate/**/bundles/*",
                 packages + "moment/min/moment-with-locales.js",
-                packages + "auth0-js/build/auth0.js"
+                packages + "auth0-js/build/auth0.js",
+                packages + "@aspnet/signalr/dist/browser/signalr.js",
             ],
             //Statically loaded in Index.cshtml
             src: [
                 packages + "core-js/client/shim.min.js",
                 packages + "zone.js/dist/zone.js",
                 packages + "systemjs/dist/system.src.js",
-                packages + "jquery/dist/jquery.js",
-                packages + "signalr/jquery.signalR.js",
-
+                
                 packages + "bootstrap/dist/css/bootstrap.css",
                 packages + "font-awesome/css/font-awesome.css"
             ]

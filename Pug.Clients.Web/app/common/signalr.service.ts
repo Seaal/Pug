@@ -1,59 +1,44 @@
 ﻿import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
+import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
 
 @Injectable()
 export class SignalRService {
 
-    private connection: SignalR.Hub.Connection;
-    private proxies: { [hubName: string] : SignalR.Hub.Proxy};
+    private connection: HubConnection;
 
     constructor() {
-        this.connection = $.hubConnection();
-        this.proxies = {};
+        this.connection = new HubConnectionBuilder()
+            .withUrl("/hubs/pug")
+            .build();
     }
 
-    public start(): Observable<boolean> {
-        const subject: Subject<boolean> = new Subject<boolean>();
+    public start(): Observable<void> {
+        const subject: Subject<void> = new Subject<void>();
 
-        this.connection.start({
-            waitForPageLoad: false
-        }).then(
-            () => subject.next(true),
-            () => subject.next(false)
+        this.connection.start().then(
+            () => subject.next(),
+            error => subject.error(error)
         );
 
-        return subject;
+        return subject.asObservable();
     }
 
-    public on<T>(hubName: string, methodName: string): Observable<T> {
-        const proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
-
+    public on<T>(methodName: string): Observable<T> {
         const subject: Subject<T> = new Subject<T>();
 
-        proxy.on(methodName, (data: T) => subject.next(data));
+        this.connection.on(methodName, (data: T) => subject.next(data));
 
-        return subject;
+        return subject.asObservable();
     }
 
-    public send<TReturn>(hubName: string, methodName: string, ...data: any[]): Observable<TReturn> {
-        const proxy: SignalR.Hub.Proxy = this.getProxy(hubName);
-
+    public send<TReturn>(methodName: string, ...data: any[]): Observable<TReturn> {
         const subject: Subject<TReturn> = new Subject<TReturn>();
 
-        data.unshift(methodName);
-
-        proxy.invoke.apply(proxy, data).then(
+        this.connection.invoke(methodName, ...data).then(
             (value: TReturn) => subject.next(value)
         );
 
         return subject;
-    }
-
-    private getProxy(hubName: string) {
-        if (!this.proxies[hubName]) {
-            this.proxies[hubName] = this.connection.createHubProxy(hubName);
-        }
-
-        return this.proxies[hubName];
     }
 }
