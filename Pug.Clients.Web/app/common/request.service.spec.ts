@@ -8,7 +8,7 @@ import { AuthenticationService } from "../authentication/authentication.service"
 describe("RequestService", () => {
 
     beforeEach(() => {
-        let appConfig: AppConfig = {
+        const appConfig: AppConfig = {
             apiEndpoint: "/api/"
         };
 

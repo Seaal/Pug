@@ -14,7 +14,7 @@ export class LobbyComponent implements OnInit {
 
     constructor(private pugService: PugService) { }
 
-	public ngOnInit(): void {
+    public ngOnInit(): void {
         this.servers = [];
         this.serverLogs = [];
 

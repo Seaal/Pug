@@ -1,7 +1,5 @@
 ﻿import { Type } from "@angular/core";
 
-import { Observable } from "rxjs/Observable";
-
 import { IPhaseStrategy } from "../iphase-strategy";
 import { PickUpGame } from "../../pick-up-game";
 import { PickPlayerPugPhase } from "./pick-player-pug-phase";

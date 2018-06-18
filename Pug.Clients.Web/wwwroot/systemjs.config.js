@@ -26,8 +26,8 @@
 
             // other libraries
             'rxjs': "npm:rxjs",
-            "@ngx-translate/core": "npm:@ngx-translate/core/bundles/core.umd.js",
-            "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/http-loader.umd.js",
+            "@ngx-translate/core": "npm:@ngx-translate/core/bundles/ngx-translate-core.umd.js",
+            "@ngx-translate/http-loader": "npm:@ngx-translate/http-loader/bundles/ngx-translate-http-loader.umd.js",
             "tslib": "npm:tslib/tslib.js",
             "moment": "npm:moment/min/moment-with-locales.js",
             "auth0-js": "npm:auth0-js/build/auth0.js"
@@ -38,7 +38,12 @@
                 main: "./main.js",
                 defaultExtension: "js"
             },
+            "rxjs/operators": {
+                main: "index.js",
+                defaultExtension: "js"
+            },
             rxjs: {
+                main: "index.js",
                 defaultExtension: "js"
             },
             "@ngx-translate/core": {

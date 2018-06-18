@@ -1,5 +1,5 @@
 ﻿import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Rx";
+import { Observable } from "rxjs";
 
 import { SignalRService } from "../common/signalr.service";
 import { Server } from "./server";
@@ -13,7 +13,7 @@ export class PugService {
     }
 
     public logListener(): Observable<string> {
-	    return this.signalrService.on<string>("pugHub", "serverLog");
+        return this.signalrService.on<string>("pugHub", "serverLog");
     }
 
     public start(): Observable<boolean> {

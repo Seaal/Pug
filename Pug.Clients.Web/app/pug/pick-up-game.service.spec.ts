@@ -1,6 +1,4 @@
-﻿import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/do";
+﻿import { of } from "rxjs";
 
 import { PickUpGameService } from "./pick-up-game.service";
 import { RequestService } from "../common/request.service";
@@ -21,7 +19,7 @@ describe("PickUpGameService", () => {
 
     describe("getPug", () => {
         beforeEach(() => {
-            requestService.get.and.returnValue(Observable.of({
+            requestService.get.and.returnValue(of({
                 id: 17,
                 currentPhase: {
                     type: 1,

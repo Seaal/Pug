@@ -1,13 +1,8 @@
 ﻿import { Router } from "@angular/router";
-
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/mergeMap";
-import "rxjs/add/observable/timer";
-import "rxjs/add/observable/throw";
+import { Observable, of, throwError } from "rxjs";
 
 import { AuthenticationService } from "./authentication.service";
 import { PersistentStorageService } from "../common/persistent-storage.service";
-import { AuthenticationConfig } from "./authentication-config";
 import { IAuthenticationProvider } from "./iauthentication.provider";
 import { User } from "./user";
 import { AuthenticationResult } from "./authentication-result";
@@ -45,7 +40,7 @@ describe("AuthenticationService", () => {
         jasmine.clock().install();
         jasmine.clock().mockDate(new Date(1000));
 
-        authenticationProvider.getUserProfile.and.returnValue(Observable.of(user));
+        authenticationProvider.getUserProfile.and.returnValue(of(user));
     });
 
     //Fixes jasmine clock not working in Angular Zone
@@ -60,7 +55,7 @@ describe("AuthenticationService", () => {
     describe("initAuthentication", () => {
 
         beforeEach(() => {
-            authenticationProvider.renewToken.and.returnValue(Observable.of(authResult));
+            authenticationProvider.renewToken.and.returnValue(of(authResult));
         });
 
         describe("when user was not previously logged in", () => {
@@ -118,7 +113,7 @@ describe("AuthenticationService", () => {
 
                 const error = "errorMessage";
 
-                authenticationProvider.renewToken.and.returnValue(Observable.throw(error));
+                authenticationProvider.renewToken.and.returnValue(throwError(error));
 
                 //Act
                 authenticationService.initAuthentication();
@@ -332,7 +327,7 @@ describe("AuthenticationService", () => {
 
     describe("handleAuthentication", () => {
         beforeEach(() => {
-            authenticationProvider.handleAuthentication.and.returnValue(Observable.of(authResult));
+            authenticationProvider.handleAuthentication.and.returnValue(of(authResult));
         });
 
         it("when redirect is set, should redirect to the url", () => {
@@ -404,7 +399,7 @@ describe("AuthenticationService", () => {
 
         it("should renew token when it expires", () => {
             //Arrange
-            authenticationProvider.renewToken.and.returnValue(Observable.of(authResult));
+            authenticationProvider.renewToken.and.returnValue(of(authResult));
 
             //Act
             authenticationService.handleAuthentication();
@@ -417,7 +412,7 @@ describe("AuthenticationService", () => {
 
         describe("when handleAuthentication errors", () => {
             beforeEach(() => {
-                authenticationProvider.handleAuthentication.and.returnValue(Observable.throw("error"));
+                authenticationProvider.handleAuthentication.and.returnValue(throwError("error"));
             });
 
             it("should redirect to default redirect url", () => {

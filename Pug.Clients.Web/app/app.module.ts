@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpModule, Http } from "@angular/http";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
@@ -16,8 +15,8 @@ import { AuthenticationConfig, AUTHENTICATION_CONFIG } from "./authentication/au
 import { AUTHENTICATION_PROVIDER } from "./authentication/iauthentication.provider";
 import { Auth0AuthenticationProvider } from "./authentication/auth0/auth0-authentication.provider";
 
-export function createTranslateLoader(http: Http) {
-    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+export function createTranslateLoader(httpClient: HttpClient) {
+    return new TranslateHttpLoader(httpClient, "./assets/i18n/", ".json");
 }
 
 const appConfig: AppConfig = {
@@ -28,9 +27,9 @@ const authConfig: AuthenticationConfig = {
     clientId: "9-1XEF_anI8ih2_UJUrP1edekKGhKSEB",
     domain: "seaal-dev.auth0.com",
     responseType: "token id_token",
-    audience: 'https://pug.gg/api/',
-    redirectUri: 'http://localhost:3000/auth/callback',
-    renewTokenUri: 'http://localhost:3000/auth/renewtoken',
+    audience: "https://pug.gg/api/",
+    redirectUri: "http://localhost:3000/auth/callback",
+    renewTokenUri: "http://localhost:3000/auth/renewtoken",
     scope: "openid profile test:scope"
 };
 
@@ -41,12 +40,11 @@ const authConfig: AuthenticationConfig = {
         AppRoutingModule,
         PugModule,
         AuthenticationModule,
-        HttpModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
-                deps: [Http]
+                deps: [HttpClient]
             }
         }
     )],

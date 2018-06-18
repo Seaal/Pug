@@ -38,8 +38,6 @@ namespace Pug.Client
             services.AddSignalR(container);
 
             services.AddAuth0Authentication(Configuration);
-
-            Configuration.GetSection("").Get<Auth0Config>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
