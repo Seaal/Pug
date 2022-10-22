@@ -3,6 +3,7 @@
 import { IPhaseComponent } from "../iphase-component";
 import { PickUpGame } from "../../pick-up-game";
 import { Player } from "../../player";
+import { PickPlayerPhaseStrategy } from "./pick-player-phase.strategy";
 
 @Component({
     moduleId: module.id,
@@ -11,8 +12,9 @@ import { Player } from "../../player";
 export class PickPlayerPhaseComponent implements IPhaseComponent {
 
     @Input() public pug: PickUpGame;
+    @Input() public phaseStrategy: PickPlayerPhaseStrategy;
 
     public onPlayerSelected(player: Player) {
-        alert(player.name);
+        this.phaseStrategy.pickPlayer(player);
     }
 }

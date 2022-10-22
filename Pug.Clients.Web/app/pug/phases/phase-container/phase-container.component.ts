@@ -36,5 +36,6 @@ export class PhaseContainerComponent implements OnInit {
         const componentRef = viewContainerRef.createComponent<IPhaseComponent>(componentFactory);
 
         componentRef.instance.pug = this.pug;
+        componentRef.instance.phaseStrategy = this.currentPhaseStrategy;
     }
 }

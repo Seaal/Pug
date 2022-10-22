@@ -17,6 +17,7 @@ import { PickUpGameResolver } from "./pick-up-game.resolver";
 import { PhaseContainerComponent } from "./phases/phase-container/phase-container.component";
 import { PhaseHostDirective } from "./phases/phase-container/phase-host.directive";
 import { LocalizationModule } from "../common/localization/localization.module";
+import { InMemoryPickUpGameService } from "./in-memory-pick-up-game.service";
 
 @NgModule({
     entryComponents: [
@@ -39,8 +40,8 @@ import { LocalizationModule } from "../common/localization/localization.module";
     ],
     providers: [
         PugService,
-        PickUpGameService,
         PhaseService,
+        { provide: PickUpGameService, useClass: InMemoryPickUpGameService },
         PugPhaseStrategyFactory,
         PickUpGameResolver
     ]

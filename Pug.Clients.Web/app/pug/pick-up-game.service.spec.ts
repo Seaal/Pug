@@ -20,7 +20,7 @@ describe("PickUpGameService", () => {
     describe("getPug", () => {
         beforeEach(() => {
             requestService.get.and.returnValue(of({
-                id: 17,
+                id: "17",
                 currentPhase: {
                     type: 1,
                     expires: "12345"
@@ -32,7 +32,7 @@ describe("PickUpGameService", () => {
             //Act
             pugService.getPug().subscribe(pug =>
                 //Assert
-                expect(pug.id).toEqual(17)
+                expect(pug.id).toEqual("17")
             );
         });
 

@@ -3,7 +3,7 @@ import { PugPhase } from "./phases/pug-phase";
 import { Team } from "./team/team";
 
 export interface PickUpGame {
-    id: number;
+    id: string;
     path: string[];
     currentPhase: PugPhase;
     teams: Team[];

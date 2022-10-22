@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 @Injectable({
     providedIn: "root"
 })
-export class PugRealTimeService extends BaseSignalRService {
+export class PugServerRealTimeService extends BaseSignalRService {
 
     constructor() {
         super("/hubs/pug");

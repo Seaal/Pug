@@ -14,7 +14,7 @@
     "@aspnet/signalr": "^1.0.0",
     "@ngx-translate/core": "^10.0.2",
     "@ngx-translate/http-loader": "^3.0.1",
-    "auth0-js": "^9.6.1",
+    "auth0-js": "^9.10.4",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.7",
     "font-awesome": "^4.7.0",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^6.0.8",
-    "@types/auth0-js": "^8.11.2",
+    "@types/auth0-js": "^8.11.12",
     "@types/jasmine": "^2.8.8",
     "@types/node": "^8.0.19",
     "browser-sync": "^2.24.4",

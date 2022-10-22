@@ -2,11 +2,11 @@
 import { Observable } from "rxjs";
 
 import { Server } from "./server";
-import { PugRealTimeService } from "./pug-real-time.service";
+import { PugServerRealTimeService } from "./pug-server-real-time.service";
 
 @Injectable()
 export class PugService {
-    constructor(private pugRealTimeService: PugRealTimeService) { }
+    constructor(private pugRealTimeService: PugServerRealTimeService) { }
 
     public initListener(): Observable<Server> {
         return this.pugRealTimeService.onServerUpdate();
